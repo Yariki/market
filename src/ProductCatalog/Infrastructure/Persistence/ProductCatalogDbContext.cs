@@ -1,35 +1,23 @@
 ﻿using System.Reflection;
-using ProductCatalog.Application.Common.Interfaces;
-using ProductCatalog.Domain.Entities;
-using ProductCatalog.Infrastructure.Identity;
-using ProductCatalog.Infrastructure.Persistence.Interceptors;
-using Duende.IdentityServer.EntityFramework.Options;
+using Market.Shared.Infrastructure.Common;
+using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
-using Microsoft.AspNetCore.ApiAuthorization.IdentityServer;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 
 namespace ProductCatalog.Infrastructure.Persistence;
 
-public class ApplicationDbContext : ApiAuthorizationDbContext<ApplicationUser>, IApplicationDbContext
+public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbContext>
 {
     private readonly IMediator _mediator;
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
 
-    public ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options,
-        IOptions<OperationalStoreOptions> operationalStoreOptions,
+    public ProductCatalogDbContext(
+        DbContextOptions<ProductCatalogDbContext> options,
         IMediator mediator,
         AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor) 
-        : base(options, operationalStoreOptions)
+        : base(options, mediator, auditableEntitySaveChangesInterceptor)
     {
-        _mediator = mediator;
-        _auditableEntitySaveChangesInterceptor = auditableEntitySaveChangesInterceptor;
     }
-
-    public DbSet<TodoList> TodoLists => Set<TodoList>();
-
-    public DbSet<TodoItem> TodoItems => Set<TodoItem>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

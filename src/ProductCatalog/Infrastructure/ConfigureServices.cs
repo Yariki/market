@@ -1,8 +1,7 @@
-﻿using ProductCatalog.Application.Common.Interfaces;
-using ProductCatalog.Infrastructure.Files;
+﻿using Market.Shared.Application.Interfaces;
+using Market.Shared.Infrastructure.Persistance.Interceptors;
 using ProductCatalog.Infrastructure.Identity;
 using ProductCatalog.Infrastructure.Persistence;
-using ProductCatalog.Infrastructure.Persistence.Interceptors;
 using ProductCatalog.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -19,31 +18,27 @@ public static class ConfigureServices
 
         if (configuration.GetValue<bool>("UseInMemoryDatabase"))
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ProductCatalogDbContext>(options =>
                 options.UseInMemoryDatabase("ProductCatalogDb"));
         }
         else
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<ProductCatalogDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
-                    builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                    builder => builder.MigrationsAssembly(typeof(ProductCatalogDbContext).Assembly.FullName)));
         }
 
-        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
+        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 
         services
             .AddDefaultIdentity<ApplicationUser>()
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ApplicationDbContext>();
-
-        services.AddIdentityServer()
-            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+            .AddEntityFrameworkStores<ProductCatalogDbContext>();
 
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddTransient<IIdentityService, IdentityService>();
-        services.AddTransient<ICsvFileBuilder, CsvFileBuilder>();
 
         services.AddAuthentication()
             .AddIdentityServerJwt();

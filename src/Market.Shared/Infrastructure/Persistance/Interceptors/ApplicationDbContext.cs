@@ -7,14 +7,14 @@ using Microsoft.Extensions.Options;
 
 namespace Market.Shared.Infrastructure.Persistance.Interceptors;
 
-public abstract class ApplicationDbContext 
-    : DbContext, IApplicationDbContext 
+public abstract class ApplicationDbContext<TContext> 
+    : DbContext, IApplicationDbContext where TContext : DbContext
 {
     private readonly IMediator _mediator;
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
 
     protected ApplicationDbContext(
-        DbContextOptions<ApplicationDbContext> options,
+        DbContextOptions<TContext> options,
         IMediator mediator,
         AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor)
         : base(options)

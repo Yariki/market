@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Application.Common.Exceptions;
+﻿using Market.Shared.Application.Exceptions;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;

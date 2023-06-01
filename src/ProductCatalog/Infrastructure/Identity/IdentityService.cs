@@ -1,5 +1,5 @@
-﻿using ProductCatalog.Application.Common.Interfaces;
-using ProductCatalog.Application.Common.Models;
+﻿using Market.Shared.Application.Interfaces;
+using Market.Shared.Application.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;

@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
-
-using ProductCatalog.Application.Common.Interfaces;
+using Market.Shared.Application.Interfaces;
 
 namespace ProductCatalog.WebUI.Services;
 

@@ -5,18 +5,22 @@ namespace Market.Shared.Application.Exceptions;
 public class NotFoundException : MarketException
 {
     public NotFoundException()
+        : base()
     {
     }
 
-    protected NotFoundException(SerializationInfo info, StreamingContext context) : base(info, context)
+    public NotFoundException(string message)
+        : base(message)
     {
     }
 
-    public NotFoundException(string? message) : base(message)
+    public NotFoundException(string message, Exception innerException)
+        : base(message, innerException)
     {
     }
 
-    public NotFoundException(string? message, Exception? innerException) : base(message, innerException)
+    public NotFoundException(string name, object key)
+        : base($"Entity \"{name}\" ({key}) was not found.")
     {
     }
 }

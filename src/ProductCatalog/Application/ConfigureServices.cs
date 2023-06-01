@@ -1,7 +1,6 @@
 ﻿using System.Reflection;
-using ProductCatalog.Application.Common.Behaviours;
-using ProductCatalog.Application.Common.Exceptions;
 using FluentValidation;
+using Market.Shared.Application.Behaviours;
 using MediatR;
 
 namespace Microsoft.Extensions.DependencyInjection;

@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Application.Common.Models;
+﻿using Market.Shared.Application.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace ProductCatalog.Infrastructure.Identity;

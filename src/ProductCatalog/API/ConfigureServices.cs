@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Application.Common.Interfaces;
+﻿using Market.Shared.Application.Interfaces;
 using ProductCatalog.Infrastructure.Persistence;
 using ProductCatalog.WebUI.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +19,7 @@ public static class ConfigureServices
         services.AddHttpContextAccessor();
 
         services.AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>();
+            .AddDbContextCheck<ProductCatalogDbContext>();
 
         services.AddScoped<FluentValidationSchemaProcessor>(provider =>
         {

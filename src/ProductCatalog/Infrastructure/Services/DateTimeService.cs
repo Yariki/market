@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Application.Common.Interfaces;
+﻿using Market.Shared.Application.Interfaces;
 
 namespace ProductCatalog.Infrastructure.Services;
 
