@@ -1,10 +1,8 @@
 ﻿using Market.Shared.Application.Interfaces;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
-using ProductCatalog.Infrastructure.Identity;
 using ProductCatalog.Infrastructure.Persistence;
 using ProductCatalog.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
@@ -32,19 +30,12 @@ public static class ConfigureServices
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 
-        services
-            .AddDefaultIdentity<ApplicationUser>()
-            .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<ProductCatalogDbContext>();
-
         services.AddTransient<IDateTime, DateTimeService>();
-        services.AddTransient<IIdentityService, IdentityService>();
 
         services.AddAuthentication()
             .AddIdentityServerJwt();
 
-        services.AddAuthorization(options =>
-            options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator")));
+        services.AddAuthorization();
 
         return services;
     }

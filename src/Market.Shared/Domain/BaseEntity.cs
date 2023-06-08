@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Market.Shared.Domain;
 
-public abstract class BaseEntity<TId> 
+public abstract class BaseEntity<TId> : IEntity<TId>
 {
     public TId Id { get; set; }
 

@@ -1,5 +1,6 @@
 ﻿using System.Runtime.Serialization;
 using FluentValidation.Results;
+using Market.Shared.Domain;
 
 namespace Market.Shared.Application.Exceptions;
  

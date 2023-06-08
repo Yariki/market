@@ -1,6 +1,6 @@
 ﻿namespace Market.Shared.Domain;
 
-public abstract class BaseAuditableEntity<TId> : BaseEntity<TId>
+public interface IAuditableEntity
 {
     public DateTime Created { get; set; }
 

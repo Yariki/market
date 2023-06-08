@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Market.Shared.Infrastructure.Persistance.Interceptors;
 
-public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
+public class AuditableEntitySaveChangesInterceptor: SaveChangesInterceptor 
 {
     private readonly ICurrentUserService _currentUserService;
     private readonly IDateTime _dateTime;
@@ -37,7 +37,7 @@ public class AuditableEntitySaveChangesInterceptor : SaveChangesInterceptor
     {
         if (context == null) return;
 
-        foreach (var entry in context.ChangeTracker.Entries<BaseAuditableEntity<object>>())
+        foreach (var entry in context.ChangeTracker.Entries<IAuditableEntity>())
         {
             if (entry.State == EntityState.Added)
             {

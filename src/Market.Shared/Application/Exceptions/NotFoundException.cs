@@ -1,4 +1,5 @@
 ﻿using System.Runtime.Serialization;
+using Market.Shared.Domain;
 
 namespace Market.Shared.Application.Exceptions;
 

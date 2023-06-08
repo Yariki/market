@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Market.Shared.Application.Exceptions;
+namespace Market.Shared.Domain;
 
 public class MarketException : Exception
 {

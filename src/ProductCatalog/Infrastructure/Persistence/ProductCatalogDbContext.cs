@@ -3,10 +3,14 @@ using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Domain.Catalog;
+using ProductCatalog.Domain.Product;
+using Unit = ProductCatalog.Domain.Product.Unit;
 
 namespace ProductCatalog.Infrastructure.Persistence;
 
-public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbContext>
+public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbContext>, IProductCatalogDbContext
 {
     private readonly IMediator _mediator;
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
@@ -18,6 +22,14 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
         : base(options, mediator, auditableEntitySaveChangesInterceptor)
     {
     }
+
+    public DbSet<Product> Products => Set<Product>();
+    
+    public DbSet<Unit> Units => Set<Unit>();
+    
+    public DbSet<Catalog> Categories => Set<Catalog>();
+    
+    public DbSet<SellUnit> SellUnits => Set<SellUnit>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
