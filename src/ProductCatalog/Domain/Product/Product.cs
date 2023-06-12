@@ -7,7 +7,7 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
 {
     private decimal _pricePerUnit;
     private decimal _availableStock;
-    private Guid? _userId;
+    private string _userId;
 
     private readonly List<SellUnit> _sellUnits;
     
@@ -16,7 +16,7 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
         _sellUnits = new List<SellUnit>();
     }
 
-    public Product(string name, Guid? userId, Guid unitId, 
+    public Product(string name, string userId, Guid unitId, 
         decimal pricePerUnit, Guid? catalogId, 
         decimal availableStock, string pictureUri, 
         string pictureFilename, string description)
@@ -35,7 +35,7 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
     
     public string Name { get; set; }
     
-    public Guid? UserId { get => _userId; }
+    public string UserId { get => _userId; }
     
     public Guid UnitId { get; set; }
     
@@ -69,9 +69,9 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
         _sellUnits.Add(new SellUnit(unitId, scalar));
     }
     
-    public void RemoveSellUnit(decimal scalar)
+    public void RemoveSellUnit(Guid id)
     {
-        var sellUnit = _sellUnits.FirstOrDefault(x => x.Scalar == scalar);
+        var sellUnit = _sellUnits.FirstOrDefault(x => x.Id == id);
         if(sellUnit == null)
         {
             throw new MarketException("Sell unit not found");
@@ -106,9 +106,14 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
         _availableStock -= quantity;
     }
 
-    public void SetUser(Guid? userId)
+    public void SetUser(string userId)
     {
         _userId = userId;
+    }
+    
+    public void SetPrice(decimal price)
+    {
+        _pricePerUnit = price;
     }
 
     public DateTime Created { get; set; }

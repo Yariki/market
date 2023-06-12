@@ -15,6 +15,7 @@ public class SellUnit : BaseIdEntity
     
     public SellUnit(Guid unitId, decimal scalar)
     {
+        Id = Guid.NewGuid();
         UnitId = unitId;
         _scalar = scalar;
     }

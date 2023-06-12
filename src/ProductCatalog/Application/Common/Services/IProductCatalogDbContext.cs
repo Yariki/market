@@ -6,9 +6,9 @@ namespace Microsoft.Extensions.DependencyInjection.Common.Services;
 
 public interface IProductCatalogDbContext
 {
-    DbSet<Product> Products { get; }
+    DbSet<ProductCatalog.Domain.Product.Product> Products { get; }
     DbSet<Unit> Units { get; }
-    DbSet<Catalog> Categories { get; }
+    DbSet<ProductCatalog.Domain.Catalog.Catalog> Categories { get; }
     DbSet<SellUnit> SellUnits { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
 }
