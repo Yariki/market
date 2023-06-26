@@ -1,13 +1,14 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Domain.Catalog;
 using ProductCatalog.Domain.Product;
+using UnitEntity = ProductCatalog.Domain.Product.Unit;
 
-namespace Microsoft.Extensions.DependencyInjection.Common.Services;
+namespace ProductCatalog.Application.Common.Services;
 
 public interface IProductCatalogDbContext
 {
     DbSet<ProductCatalog.Domain.Product.Product> Products { get; }
-    DbSet<Unit> Units { get; }
+    DbSet<UnitEntity> Units { get; }
     DbSet<ProductCatalog.Domain.Catalog.Catalog> Categories { get; }
     DbSet<SellUnit> SellUnits { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);

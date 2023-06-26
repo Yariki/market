@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market.Shared.Application.Interfaces;
+using Market.Shared.Infrastructure.Common.Extensions;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Application.Common.Services;
+using ProductCatalog.Application.Product.Models;
 
 namespace ProductCatalog.Application.Product.Commands.AddProduct;
 public class AddProductCommand : IRequest<Guid>
@@ -27,6 +29,8 @@ public class AddProductCommand : IRequest<Guid>
     public decimal MaxStockThreshold { get; set; }
 
     public Guid? CatalogId { get; set; }
+    
+    public SellUnitDto[] SellUnits { get; set; }
 
 }
 
@@ -62,8 +66,26 @@ public class AddProductCommandHandler : IRequestHandler<AddProductCommand, Guid>
         await _productCatalogDbContext.Products.AddAsync(product, cancellationToken);
         await _productCatalogDbContext.SaveChangesAsync(cancellationToken);
 
+        await AddSellUnits(product, request.SellUnits, cancellationToken);
+        
         return product.Id;
     }
+
+    private async Task AddSellUnits(Domain.Product.Product product, SellUnitDto[] sellUnits, CancellationToken cancellationToken)
+    {
+        if (sellUnits.IsNull() || !sellUnits.Any())
+        {
+            return;
+        }
+
+        foreach (var sellUnit in sellUnits)
+        {
+            product.AddSellUnit(sellUnit.UnitId, sellUnit.Scalar);
+        }
+
+        await _productCatalogDbContext.SaveChangesAsync(cancellationToken);
+    }
+    
 }
 
 

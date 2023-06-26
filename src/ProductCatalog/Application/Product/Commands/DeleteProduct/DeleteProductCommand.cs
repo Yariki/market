@@ -1,7 +1,8 @@
 ﻿using Market.Shared.Application.Exceptions;
 using Market.Shared.Infrastructure.Common.Extensions;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Application.Common.Services;
+
 
 namespace Microsoft.Extensions.DependencyInjection.Product.Commands.DeleteProduct;
 

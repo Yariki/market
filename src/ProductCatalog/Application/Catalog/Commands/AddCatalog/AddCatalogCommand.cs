@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Application.Common.Services;
 using CatalogEntity = ProductCatalog.Domain.Catalog.Catalog;
 
 namespace ProductCatalog.Application.Catalog.Commands.AddCatalog;

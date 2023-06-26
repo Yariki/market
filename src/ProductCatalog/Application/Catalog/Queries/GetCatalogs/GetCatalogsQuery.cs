@@ -2,10 +2,10 @@
 using AutoMapper.QueryableExtensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection.Catalog.Models;
-using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Application.Catalog.Models;
+using ProductCatalog.Application.Common.Services;
 
-namespace Microsoft.Extensions.DependencyInjection.Catalog.Queries.GetCatalogs;
+namespace ProductCatalog.Application.Catalog.Queries.GetCatalogs;
 
 public class GetCatalogsQuery : IRequest<IEnumerable<CatalogDto>>
 {

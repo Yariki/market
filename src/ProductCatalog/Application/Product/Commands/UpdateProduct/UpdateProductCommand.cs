@@ -1,7 +1,8 @@
 ﻿using Market.Shared.Application.Exceptions;
 using Market.Shared.Infrastructure.Common.Extensions;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection.Common.Services;
+using ProductCatalog.Application.Common.Services;
+using ProductCatalog.Application.Product.Models;
 
 namespace Microsoft.Extensions.DependencyInjection.Product.Commands.UpdateProduct;
 
@@ -24,6 +25,8 @@ public class UpdateProductCommand : IRequest
     public string PictureFilename { get; set; }
     
     public decimal? MaxStockThreshold { get; set; }
+
+    public SellUnitDto[] SellUnits { get; set; }    
     
 }
 
@@ -53,7 +56,27 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
         request.PictureUri.IfNotNullSet(pictureUri => product.PictureUri = pictureUri);
         request.PictureFilename.IfNotNullSet(pictureFilename => product.PictureFilename = pictureFilename);
         product.MaxStockThreshold.IfNotNullSet(m => product.MaxStockThreshold = m);
+
+        UpdateSellUnits(product, request.SellUnits);
         
         return  _productCatalogDbContext.SaveChangesAsync(cancellationToken);
     }
+
+    private void UpdateSellUnits( ProductCatalog.Domain.Product.Product product, SellUnitDto[] sellUnits)
+    {
+        var existingSellUnits = product.SellUnits.ToList();
+        var newSellUnits = sellUnits.Where(sellUnit => existingSellUnits.All(existingSellUnit => existingSellUnit.Id != sellUnit.Id)).ToList();
+        var removedSellUnits = existingSellUnits.Where(existingSellUnit => sellUnits.All(sellUnit => sellUnit.Id != existingSellUnit.Id)).ToList();
+
+        foreach (var sellUnit in newSellUnits)
+        {
+            product.AddSellUnit(sellUnit.UnitId, sellUnit.Scalar);
+        }
+
+        foreach (var sellUnit in removedSellUnits)
+        {
+            product.RemoveSellUnit(sellUnit.Id);
+        }
+    }
+
 }

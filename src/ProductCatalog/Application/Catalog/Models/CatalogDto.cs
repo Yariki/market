@@ -1,7 +1,7 @@
 ﻿using Market.Shared.Application.Mappings;
 using CatalogEntity = ProductCatalog.Domain.Catalog.Catalog;
 
-namespace Microsoft.Extensions.DependencyInjection.Catalog.Models;
+namespace ProductCatalog.Application.Catalog.Models;
 
 public class CatalogDto : IMapFrom<CatalogEntity>
 {
