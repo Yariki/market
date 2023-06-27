@@ -13,7 +13,7 @@ public class SellUnit : BaseIdEntity
         
     }
     
-    public SellUnit(Guid unitId, decimal scalar)
+    private SellUnit(Guid unitId, decimal scalar)
     {
         Id = Guid.NewGuid();
         UnitId = unitId;
@@ -33,6 +33,6 @@ public class SellUnit : BaseIdEntity
     
     public static SellUnit CreateNew(Guid unitId, decimal scalar)
     {
-        return new SellUnit(unitId, scalar) { Id = Guid.NewGuid()};
+        return new SellUnit(unitId, scalar);
     }
 }

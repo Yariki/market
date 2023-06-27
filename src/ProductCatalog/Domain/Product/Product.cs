@@ -11,7 +11,7 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
 
     private readonly List<SellUnit> _sellUnits;
     
-    protected Product()
+    public Product()
     {
         _sellUnits = new List<SellUnit>();
     }
@@ -66,7 +66,7 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
             throw new MarketException("Sell unit already exists");
         }
         
-        _sellUnits.Add(new SellUnit(unitId, scalar));
+        _sellUnits.Add(SellUnit.CreateNew(unitId, scalar));
     }
     
     public void RemoveSellUnit(Guid id)
