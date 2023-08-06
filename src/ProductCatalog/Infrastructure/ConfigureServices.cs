@@ -22,7 +22,7 @@ public static class ConfigureServices
         else
         {
             services.AddDbContext<ProductCatalogDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
                     builder => builder.MigrationsAssembly(typeof(ProductCatalogDbContext).Assembly.FullName)));
         }
 

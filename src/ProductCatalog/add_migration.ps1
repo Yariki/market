@@ -1,1 +1,3 @@
-dotnet ef migrations add $p1 --project Infrastructure --startup-project API --output-dir Persistence\Migrations
+param([string]$name = 'Initial')
+
+dotnet-ef migrations add $name -s API\Api.csproj -p Infrastructure\Infrastructure.csproj -o Persistence\Migrations
