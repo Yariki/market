@@ -25,9 +25,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{95029506-D760-4AD2-B208-6ACEAB560B53}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Shared", "..\Market.Shared\Market.Shared.csproj", "{14F4B608-206E-4148-B349-88A3D29FE853}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Market.Shared", "..\Shared\Market.Shared\Market.Shared.csproj", "{14F4B608-206E-4148-B349-88A3D29FE853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Integration.Tests", "..\Shared.Integration.Tests\Shared.Integration.Tests.csproj", "{57A78736-1F4B-4EE6-8871-E92BB3A5768C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Integration.Tests", "..\Shared\Shared.Integration.Tests\Shared.Integration.Tests.csproj", "{57A78736-1F4B-4EE6-8871-E92BB3A5768C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
