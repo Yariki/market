@@ -12,7 +12,11 @@ using ProductCatalog.Infrastructure.Persistence;
 namespace ProductCatalog.Infrastructure.Persistence.Migrations
 {
     [DbContext(typeof(ProductCatalogDbContext))]
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.Designer.cs
     [Migration("20230806231016_Initial")]
+========
+    [Migration("20230904211507_Initial")]
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.Designer.cs
     partial class Initial
     {
         /// <inheritdoc />
@@ -60,8 +64,12 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.Designer.cs
                         .IsRequired()
                         .HasColumnType("text");
+========
+                        .HasColumnType("nvarchar(max)");
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.Designer.cs
 
                     b.Property<DateTime?>("LastModified")
                         .HasColumnType("timestamp with time zone");
@@ -74,6 +82,7 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.Designer.cs
                         .HasColumnType("text");
 
                     b.Property<string>("PictureFilename")
@@ -83,9 +92,30 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                     b.Property<string>("PictureUri")
                         .IsRequired()
                         .HasColumnType("text");
+========
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("PictureFilename")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureUri")
+                        .HasColumnType("nvarchar(max)");
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.Designer.cs
 
                     b.Property<Guid>("UnitId")
                         .HasColumnType("uuid");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("_availableStock")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("AvailableStock");
+
+                    b.Property<decimal>("_pricePerUnit")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("PricePerUnit");
 
                     b.HasKey("Id");
 
@@ -108,6 +138,10 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                     b.Property<Guid>("UnitId")
                         .HasColumnType("uuid");
 
+                    b.Property<decimal>("_scalar")
+                        .HasColumnType("decimal(18,2)")
+                        .HasColumnName("Scalar");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProductId");
@@ -125,11 +159,20 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
 
                     b.Property<string>("Abbriviation")
                         .IsRequired()
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.Designer.cs
                         .HasColumnType("text");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("text");
+========
+                        .HasMaxLength(25)
+                        .HasColumnType("nvarchar(25)");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.Designer.cs
 
                     b.HasKey("Id");
 

@@ -3,14 +3,13 @@ using AutoMapper;
 
 namespace Market.Shared.Application.Mappings;
 
-public class MappingProfile : Profile
+public abstract class MappingProfile : Profile
 {
-    public MappingProfile()
+    protected MappingProfile()
     {
-        ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
-    private void ApplyMappingsFromAssembly(Assembly assembly)
+    protected void ApplyMappingsFromAssembly(Assembly assembly)
     {
         var mapFromType = typeof(IMapFrom<>);
         

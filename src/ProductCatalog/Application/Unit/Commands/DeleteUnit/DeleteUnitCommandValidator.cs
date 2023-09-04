@@ -7,6 +7,6 @@ public class DeleteUnitCommandValidator : AbstractValidator<DeleteUnitCommand>
     public DeleteUnitCommandValidator()
     {
         RuleFor(x => x.UnitId)
-            .NotEmpty();
+            .NotEqual(Guid.Empty);
     }
 }

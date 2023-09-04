@@ -1,8 +1,7 @@
 using MediatR;
 using ProductCatalog.Application.Common.Services;
-using UnitEntity = ProductCatalog.Domain.Product.Unit;
 
-namespace ProductCatalog.Application.Unit.Commands.AddUnit;
+namespace ProductCatalog.Application.UnitEntity.Commands.AddUnit;
 
 public class AddUnitCommand : IRequest<Guid>
 {
@@ -21,7 +20,7 @@ public class AddUnitCommandHandler : IRequestHandler<AddUnitCommand, Guid>
 
     public async Task<Guid> Handle(AddUnitCommand request, CancellationToken cancellationToken)
     {
-        var unit = UnitEntity.CreateUnit(request.Abbriviation, request.Description);
+        var unit = ProductCatalog.Domain.Product.Unit.CreateUnit(request.Abbriviation, request.Description);
 
         await _productCatalogDbContext.Units.AddAsync(unit, cancellationToken); 
         await  _productCatalogDbContext.SaveChangesAsync(cancellationToken);

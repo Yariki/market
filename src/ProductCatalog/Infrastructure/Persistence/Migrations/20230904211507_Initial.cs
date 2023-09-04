@@ -28,9 +28,15 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                 name: "Units",
                 columns: table => new
                 {
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.cs
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Abbriviation = table.Column<string>(type: "text", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false)
+========
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Abbriviation = table.Column<string>(type: "nvarchar(25)", maxLength: 25, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: true)
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.cs
                 },
                 constraints: table =>
                 {
@@ -41,6 +47,7 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                 name: "Products",
                 columns: table => new
                 {
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.cs
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     UnitId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -53,6 +60,23 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                     CreatedBy = table.Column<string>(type: "text", nullable: true),
                     LastModified = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     LastModifiedBy = table.Column<string>(type: "text", nullable: true)
+========
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CatalogId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    PictureUri = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PictureFilename = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    MaxStockThreshold = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Created = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastModified = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    LastModifiedBy = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AvailableStock = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    PricePerUnit = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.cs
                 },
                 constraints: table =>
                 {
@@ -74,9 +98,16 @@ namespace ProductCatalog.Infrastructure.Persistence.Migrations
                 name: "SellUnits",
                 columns: table => new
                 {
+<<<<<<<< HEAD:src/ProductCatalog/Infrastructure/Persistence/Migrations/20230806231016_Initial.cs
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     UnitId = table.Column<Guid>(type: "uuid", nullable: false),
                     ProductId = table.Column<Guid>(type: "uuid", nullable: true)
+========
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    UnitId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    Scalar = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+>>>>>>>> 03adc4f (refactored code and added integration tests):src/ProductCatalog/Infrastructure/Persistence/Migrations/20230904211507_Initial.cs
                 },
                 constraints: table =>
                 {

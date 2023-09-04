@@ -1,6 +1,6 @@
 using FluentValidation;
 
-namespace ProductCatalog.Application.Unit.Commands.AddUnit;
+namespace ProductCatalog.Application.UnitEntity.Commands.AddUnit;
 
 public class AddUnitCommandValidator : AbstractValidator<AddUnitCommand>
 {
@@ -10,7 +10,6 @@ public class AddUnitCommandValidator : AbstractValidator<AddUnitCommand>
             .NotEmpty()
             .MaximumLength(25);
         RuleFor(x => x.Description)
-            .Empty()
             .MaximumLength(255);
     }
 }

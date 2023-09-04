@@ -31,6 +31,8 @@ public class Product : BaseIdEntity, IAggregatorRoot, IAuditableEntity
         PictureUri = pictureUri;
         PictureFilename = pictureFilename;
         Description = description;
+
+        _sellUnits = new List<SellUnit>();
     }
     
     public string Name { get; set; }

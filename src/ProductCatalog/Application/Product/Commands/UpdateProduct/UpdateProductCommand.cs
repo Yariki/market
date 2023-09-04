@@ -25,6 +25,8 @@ public class UpdateProductCommand : IRequest
     public string PictureFilename { get; set; }
     
     public decimal? MaxStockThreshold { get; set; }
+    
+    public Guid UnitId { get; set; }
 
     public SellUnitDto[] SellUnits { get; set; }    
     
@@ -49,14 +51,15 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
         }
 
         product.Name = request.Name;
+        product.UnitId = request.UnitId;
         request.Description.IfNotNullSet(desc => product.Description = desc);
+        request.MaxStockThreshold.IfNotNullSet(m => product.MaxStockThreshold = m.Value);
         request.PricePerUnit.IfNotNullSet(price => product.SetPrice(price.Value));
         request.CatalogId.IfNotNullSet(catalogId => product.CatalogId = catalogId.Value);        
         request.AvailableStock.IfNotNullSet(availableStock => product.AddStock(availableStock.Value));
         request.PictureUri.IfNotNullSet(pictureUri => product.PictureUri = pictureUri);
         request.PictureFilename.IfNotNullSet(pictureFilename => product.PictureFilename = pictureFilename);
-        product.MaxStockThreshold.IfNotNullSet(m => product.MaxStockThreshold = m);
-
+        
         UpdateSellUnits(product, request.SellUnits);
         
         return  _productCatalogDbContext.SaveChangesAsync(cancellationToken);
@@ -64,18 +67,34 @@ public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
 
     private void UpdateSellUnits( ProductCatalog.Domain.Product.Product product, SellUnitDto[] sellUnits)
     {
+        if (sellUnits.IsNull())
+        {
+            return;
+        }
+        
+        if (product.SellUnits.IsNull())
+        {
+                AddSellUnits(product, sellUnits);
+                return;
+        }
+        
         var existingSellUnits = product.SellUnits.ToList();
         var newSellUnits = sellUnits.Where(sellUnit => existingSellUnits.All(existingSellUnit => existingSellUnit.Id != sellUnit.Id)).ToList();
         var removedSellUnits = existingSellUnits.Where(existingSellUnit => sellUnits.All(sellUnit => sellUnit.Id != existingSellUnit.Id)).ToList();
 
-        foreach (var sellUnit in newSellUnits)
-        {
-            product.AddSellUnit(sellUnit.UnitId, sellUnit.Scalar);
-        }
+        AddSellUnits(product, newSellUnits);
 
         foreach (var sellUnit in removedSellUnits)
         {
             product.RemoveSellUnit(sellUnit.Id);
+        }
+
+        void AddSellUnits(ProductCatalog.Domain.Product.Product product1, IEnumerable<SellUnitDto> sellUnitDtos)
+        {
+            foreach (var sellUnit in sellUnitDtos)
+            {
+                product1.AddSellUnit(sellUnit.UnitId, sellUnit.Scalar);
+            }
         }
     }
 

@@ -9,6 +9,7 @@ public class BaseProductConfiguration<TEntity> : IEntityTypeConfiguration<TEntit
     public void Configure(EntityTypeBuilder<TEntity> builder)
     {
         ConfigureKeys(builder);
+        ConfigureEntity(builder);
     }
 
     protected virtual void ConfigureKeys(EntityTypeBuilder<TEntity> builder)

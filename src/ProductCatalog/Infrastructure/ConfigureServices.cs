@@ -5,6 +5,7 @@ using ProductCatalog.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ProductCatalog.Application.Common.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -26,7 +27,7 @@ public static class ConfigureServices
                     builder => builder.MigrationsAssembly(typeof(ProductCatalogDbContext).Assembly.FullName)));
         }
 
-        services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());
+        services.AddScoped<IProductCatalogDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());
 
         services.AddScoped<ApplicationDbContextInitialiser>();
 

@@ -10,6 +10,16 @@ public  class UpdateCatalogCommandValidator : AbstractValidator<UpdateCatalogCom
 {
     public UpdateCatalogCommandValidator()
     {
+        RuleFor(c => c.Id)
+            .NotEmpty();
+        RuleFor(c => c.Id)
+            .Custom((id, context) =>
+            {
+                if (id == Guid.Empty)
+                {
+                    context.AddFailure("Id is empty");
+                }
+            });    
         RuleFor(c => c.Name)
             .MaximumLength(256)
             .NotEmpty();
