@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 
@@ -8,7 +7,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Catalog;
 
-public class AddCatalogTests : BaseTestFixture
+public class AddCatalogTests : ApplicationBaseFixture
 {
     [Test]
     public async Task AddCatalog_ValidationFailed()

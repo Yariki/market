@@ -1,16 +1,14 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.IntegrationTests.Data;
 using ProductCatalog.Application.Product.Commands.AddProduct;
-using ProductCatalog.Application.Units.Commands.AddUnit;
 
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
-public class AddProductCommandTests : BaseTestFixture
+public class AddProductCommandTests : ApplicationBaseFixture
 {
     [Test]
     public async Task AddProduct_NameValidationFailed()
@@ -83,7 +81,7 @@ public class AddProductCommandTests : BaseTestFixture
             .ThrowAsync<ValidationException>()
             .Where(x => x.Errors.Any(e => e.PropertyName == nameof(command.AvailableStock)));
     }
-    
+
     [Test]
     public async Task AddProduct_DescriptionValidationFailed()
     {
@@ -104,7 +102,7 @@ public class AddProductCommandTests : BaseTestFixture
             .ThrowAsync<ValidationException>()
             .Where(x => x.Errors.Any(e => e.PropertyName == nameof(command.Description)));
     }
-    
+
     [Test]
     public async Task AddProduct_PictureFilenameValidationFailed()
     {
@@ -125,7 +123,7 @@ public class AddProductCommandTests : BaseTestFixture
             .ThrowAsync<ValidationException>()
             .Where(x => x.Errors.Any(e => e.PropertyName == nameof(command.PictureFilename)));
     }
-    
+
     [Test]
     public async Task AddProduct_PictureUriValidationFailed()
     {

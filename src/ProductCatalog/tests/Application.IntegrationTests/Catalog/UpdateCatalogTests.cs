@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 using ProductCatalog.Application.Catalogs.Commands.UpdateCatalog;
@@ -9,7 +8,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Catalog;
 
-public class UpdateCatalogTests : BaseTestFixture
+public class UpdateCatalogTests : ApplicationBaseFixture
 {
 
     [Test]

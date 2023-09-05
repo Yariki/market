@@ -1,9 +1,9 @@
 ﻿using Market.Shared.Application.Mappings;
-using CatalogEntity = ProductCatalog.Domain.Catalogs.Catalog;
+using ProductCatalog.Domain.Catalogs;
 
 namespace ProductCatalog.Application.Catalogs.Models;
 
-public class CatalogDto : IMapFrom<CatalogEntity>
+public class CatalogDto : IMapFrom<Catalog>
 {
     public Guid Id { get; set; }
 

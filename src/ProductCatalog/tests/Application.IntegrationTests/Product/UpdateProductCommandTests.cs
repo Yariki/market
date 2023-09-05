@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Integration.Tests;
 using Microsoft.Extensions.DependencyInjection.Product.Commands.UpdateProduct;
 using NUnit.Framework;
 using ProductCatalog.Application.IntegrationTests.Data;
@@ -10,7 +9,7 @@ using ValidationException = FluentValidation.ValidationException;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
-public class UpdateProductCommandTests : BaseTestFixture
+public class UpdateProductCommandTests : ApplicationBaseFixture
 {
     [Test]
     public async Task UpdateProduct_ProductIdValidationFailed()
@@ -34,7 +33,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_NameValidationFailed()
     {
@@ -57,7 +56,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_UnitIdValidationFailed()
     {
@@ -80,7 +79,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_PricePerUnitValidationFailed()
     {
@@ -103,7 +102,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_AvailableInStockValidationFailed()
     {
@@ -127,7 +126,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .ThrowAsync<ValidationException>();
     }
 
-    
+
     [Test]
     public async Task UpdateProduct_DescriptionValidationFailed()
     {
@@ -151,7 +150,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .ThrowAsync<ValidationException>();
     }
 
-    
+
     [Test]
     public async Task UpdateProduct_PictureFilenameValidationFailed()
     {
@@ -174,7 +173,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_PictureUriValidationFailed()
     {
@@ -220,7 +219,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             .Should()
             .ThrowAsync<NotFoundException>();
     }
-    
+
     [Test]
     public async Task UpdateProduct_Success()
     {
@@ -239,7 +238,7 @@ public class UpdateProductCommandTests : BaseTestFixture
             PictureFilename = "filename2",
             UnitId = SeedData.Unit1Id1
         };
-        
+
         await SendAsync(updateCommand);
 
         var product = await FindAsync<Domain.Product.Product>(productId);
@@ -265,5 +264,5 @@ public class UpdateProductCommandTests : BaseTestFixture
 
         return SendAsync(command);
     }
-    
+
 }

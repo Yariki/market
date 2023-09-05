@@ -1,16 +1,14 @@
 ﻿using FluentAssertions;
-using FluentValidation;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Integration.Tests;
-using ProductCatalog.Application.Units.Commands.UpdateUnit;
 using NUnit.Framework;
 using ProductCatalog.Application.Units.Commands.AddUnit;
+using ProductCatalog.Application.Units.Commands.UpdateUnit;
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Unit;
 
 
-public class UpdateUnitTests : BaseTestFixture
+public class UpdateUnitTests : ApplicationBaseFixture
 {
     [Test]
     public async Task UpdateUnit_IdValidationFailed()
@@ -105,9 +103,9 @@ public class UpdateUnitTests : BaseTestFixture
             Abbriviation = v1,
             Description = v2
         };
-        
+
         var unitId = await SendAsync(add);
 
-        return unitId;  
+        return unitId;
     }
 }

@@ -1,16 +1,13 @@
 ﻿using FluentAssertions;
-using FluentValidation;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Integration.Tests;
-using ProductCatalog.Application.Units.Commands.DeleteUnit;
-using ProductCatalog.Application.Units.Commands.UpdateUnit;
 using NUnit.Framework;
 using ProductCatalog.Application.Units.Commands.AddUnit;
+using ProductCatalog.Application.Units.Commands.DeleteUnit;
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
-public class DeleteUnitTests : BaseTestFixture
+public class DeleteUnitTests : ApplicationBaseFixture
 {
     [Test]
     public async Task DeleteUnit_IdValidationFailed()
@@ -65,10 +62,10 @@ public class DeleteUnitTests : BaseTestFixture
             Abbriviation = v1,
             Description = v2
         };
-        
+
         var unitId = await SendAsync(add);
 
-        return unitId;  
+        return unitId;
     }
 
 }

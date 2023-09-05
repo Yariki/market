@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Units.Commands.AddUnit;
 using ProductCatalog.Application.Units.Queries;
@@ -7,7 +6,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
-public class GetUnitsTests : BaseTestFixture
+public class GetUnitsTests : ApplicationBaseFixture
 {
 
     [Test]
@@ -47,4 +46,9 @@ public class GetUnitsTests : BaseTestFixture
         return unitId;
     }
 
+
+    protected override async Task ResetTestState()
+    {
+        ResetState().GetAwaiter().GetResult();
+    }
 }

@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 using ProductCatalog.Application.Catalogs.Commands.DeleteCatalog;
@@ -8,7 +7,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Catalog;
 
-public class DeleteCatalogTests : BaseTestFixture
+public class DeleteCatalogTests : ApplicationBaseFixture
 {
 
     [Test]

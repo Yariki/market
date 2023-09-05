@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentValidation;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Units.Commands.AddUnit;
 
@@ -8,7 +7,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Unit;
 
-public class AddUnitTests : BaseTestFixture
+public class AddUnitTests : ApplicationBaseFixture
 {
     [Test]
     public async Task AddUnit_AbbriviationValidationFailed()

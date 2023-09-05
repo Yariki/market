@@ -1,3 +1,4 @@
+using AutoMapper.Internal;
 using ProductCatalog.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +10,10 @@ builder.Services.AddApiServices();
 
 builder.Services.AddControllers();
 
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(mce =>
+    {
+        mce.Internal().MethodMappingEnabled = false;
+    }, AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

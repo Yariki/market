@@ -1,10 +1,13 @@
-﻿using MediatR;
+﻿using System.Data.Common;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using ProductCatalog.Application.IntegrationTests.Data;
 using ProductCatalog.Infrastructure.Persistence;
+using Respawn;
+using Respawn.Graph;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
@@ -18,16 +21,20 @@ public partial class AppicationTesting
 
     private static string _currentUserId = null!;
 
+
+    private static Respawner _respawner = null;
+    private static DbConnection _connection = null;
+
     [OneTimeSetUp]
     public void RunBeforeAnyTest()
     {
         _factory = new ProductCatalogApplicationFactory();
         ScopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _configuration = _factory.Services.GetRequiredService<IConfiguration>();
-         
-        SeedDataAsync().GetAwaiter().GetResult();
+
+        InitiRespawner().GetAwaiter().GetResult();
     }
-                                
+
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {
@@ -95,4 +102,28 @@ public partial class AppicationTesting
         var context = scope.ServiceProvider.GetRequiredService<ProductCatalogDbContext>();
         await SeedData.SeedAdditionalDataAsync(context);
     }
+
+    private static async Task InitiRespawner()
+    {
+        var repawnerOptions = new RespawnerOptions()
+        {
+            TablesToIgnore = new Table[] { "__EFMigrationsHistory" },
+            DbAdapter = DbAdapter.SqlServer,
+        };
+        using var scope = ScopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ProductCatalogDbContext>();
+        _connection = context.Database.GetDbConnection();
+        await _connection.OpenAsync();
+        _respawner = await Respawner.CreateAsync(_connection, repawnerOptions);
+    }
+
+    public static async Task ResetState()
+    {
+        using var scope = ScopeFactory.CreateScope();
+        var context = scope.ServiceProvider.GetRequiredService<ProductCatalogDbContext>();
+        _connection = context.Database.GetDbConnection();
+        await _connection.OpenAsync();
+        await _respawner.ResetAsync(_connection);
+    }
+
 }

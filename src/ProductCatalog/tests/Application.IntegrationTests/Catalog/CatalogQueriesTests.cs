@@ -1,5 +1,4 @@
 ﻿using FluentAssertions;
-using Market.Shared.Integration.Tests;
 using NUnit.Framework;
 using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 using ProductCatalog.Application.Catalogs.Queries.GetCatalogs;
@@ -7,7 +6,7 @@ using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;
 
-public class CatalogQueriesTests : BaseTestFixture
+public class CatalogQueriesTests : ApplicationBaseFixture
 {
 
     [Test]
@@ -37,4 +36,8 @@ public class CatalogQueriesTests : BaseTestFixture
         return id;
     }
 
+    protected override async Task ResetTestState()
+    {
+        ResetState().GetAwaiter().GetResult();
+    }
 }
