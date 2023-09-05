@@ -2,7 +2,7 @@
 using FluentValidation;
 using Market.Shared.Integration.Tests;
 using NUnit.Framework;
-using ProductCatalog.Application.UnitEntity.Commands.AddUnit;
+using ProductCatalog.Application.Units.Commands.AddUnit;
 
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 

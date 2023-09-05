@@ -2,10 +2,10 @@
 using FluentValidation;
 using Market.Shared.Application.Exceptions;
 using Market.Shared.Integration.Tests;
-using Microsoft.Extensions.DependencyInjection.Unit.Commands.DeleteUnit;
-using Microsoft.Extensions.DependencyInjection.Unit.Commands.UpdateUnit;
+using ProductCatalog.Application.Units.Commands.DeleteUnit;
+using ProductCatalog.Application.Units.Commands.UpdateUnit;
 using NUnit.Framework;
-using ProductCatalog.Application.UnitEntity.Commands.AddUnit;
+using ProductCatalog.Application.Units.Commands.AddUnit;
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;

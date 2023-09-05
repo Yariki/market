@@ -4,7 +4,7 @@ using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Application.Common.Services;
-using ProductCatalog.Domain.Catalog;
+using ProductCatalog.Domain.Catalogs;
 using ProductCatalog.Domain.Product;
 using Unit = ProductCatalog.Domain.Product.Unit;
 

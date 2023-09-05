@@ -13,7 +13,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\Market.Shared\Market.Shared.csproj" />
+      <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
+      <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
     </ItemGroup>
 
 </Project>

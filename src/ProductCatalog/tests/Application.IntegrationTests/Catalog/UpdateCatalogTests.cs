@@ -2,8 +2,8 @@
 using FluentValidation;
 using Market.Shared.Integration.Tests;
 using NUnit.Framework;
-using ProductCatalog.Application.Catalog.Commands.AddCatalog;
-using ProductCatalog.Application.Catalog.Commands.UpdateCatalog;
+using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
+using ProductCatalog.Application.Catalogs.Commands.UpdateCatalog;
 
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
@@ -64,7 +64,7 @@ public class UpdateCatalogTests : BaseTestFixture
 
         var catalogId = await SendAsync(update);
 
-        var updatedCatalog = await FindAsync<Domain.Catalog.Catalog>(catalogId);
+        var updatedCatalog = await FindAsync<Domain.Catalogs.Catalog>(catalogId);
 
         updatedCatalog.Should().NotBeNull();
         updatedCatalog.Name.Should().Be("Catalog2");

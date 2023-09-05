@@ -2,14 +2,14 @@
 using FluentValidation;
 using Market.Shared.Integration.Tests;
 using NUnit.Framework;
-using ProductCatalog.Application.Catalog.Commands.AddCatalog;
+using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Catalog;
 
 public class AddCatalogTests : BaseTestFixture
-{   
+{
     [Test]
     public async Task AddCatalog_ValidationFailed()
     {
@@ -20,7 +20,7 @@ public class AddCatalogTests : BaseTestFixture
             .Should()
             .ThrowAsync<ValidationException>();
     }
-    
+
     [Test]
     public async Task AddCatalog_Success()
     {
@@ -28,10 +28,10 @@ public class AddCatalogTests : BaseTestFixture
 
         var catalogId = await SendAsync(addCommand);
 
-        var catalog = await FindAsync<Domain.Catalog.Catalog>(catalogId);
+        var catalog = await FindAsync<Domain.Catalogs.Catalog>(catalogId);
 
         catalog.Should().NotBeNull();
         catalog.Name.Should().Be("Catalog1");
     }
-    
+
 }

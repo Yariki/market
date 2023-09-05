@@ -1,17 +1,16 @@
 ﻿using FluentAssertions;
-using FluentValidation;
 using Market.Shared.Application.Exceptions;
 using Market.Shared.Integration.Tests;
 using NUnit.Framework;
-using ProductCatalog.Application.Catalog.Commands.AddCatalog;
-using ProductCatalog.Application.Catalog.Commands.DeleteCatalog;
+using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
+using ProductCatalog.Application.Catalogs.Commands.DeleteCatalog;
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests.Catalog;
 
 public class DeleteCatalogTests : BaseTestFixture
 {
-    
+
     [Test]
     public async Task DeleteCatalog_ValidationIdFailed()
     {
@@ -24,7 +23,7 @@ public class DeleteCatalogTests : BaseTestFixture
             .Invoking(() => SendAsync(deleteCommand))
             .Should()
             .ThrowAsync<FluentValidation.ValidationException>();
-    }         
+    }
 
 
     [Test]
@@ -35,7 +34,7 @@ public class DeleteCatalogTests : BaseTestFixture
             Id = Guid.NewGuid()
         };
 
-        
+
         await FluentActions
             .Invoking(() => SendAsync(deleteCommand))
             .Should()
@@ -61,7 +60,7 @@ public class DeleteCatalogTests : BaseTestFixture
 
         result.Should().BeTrue();
 
-        var catalog = await FindAsync<Domain.Catalog.Catalog>(id);
+        var catalog = await FindAsync<Domain.Catalogs.Catalog>(id);
 
         catalog.Should().BeNull();
     }

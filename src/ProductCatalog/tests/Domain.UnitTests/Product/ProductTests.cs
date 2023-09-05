@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentAssertions;
+﻿using FluentAssertions;
 using NUnit.Framework;
 using ProductCatalog.Domain.Product;
 using ProductEntity = ProductCatalog.Domain.Product.Product;
@@ -12,7 +7,7 @@ namespace ProductCatalog.Domain.UnitTests.Product;
 
 public class ProductTests
 {
-    private const string UserId =  "user-id";
+    private const string UserId = "user-id";
 
     [Test]
     public void CreateProduct()
@@ -21,11 +16,11 @@ public class ProductTests
 
         var product = CreateProduct(
             unit.Id,
-            10, 
-            null, 
-            10, 
-            "pictureUri", 
-            "pictureFilename", 
+            10,
+            null,
+            10,
+            "pictureUri",
+            "pictureFilename",
             "description");
 
         product.Should().NotBeNull();
@@ -46,20 +41,20 @@ public class ProductTests
 
 
 
-    private ProductEntity CreateProduct(Guid unitId,  
+    private ProductEntity CreateProduct(Guid unitId,
         decimal? pricePerUnit,
         Guid? catalogId,
         decimal? availableInStock,
-        string pictureUri, 
+        string pictureUri,
         string pictureFilename,
         string description)
     {
-        var product = new ProductEntity("product", UserId, unitId, 
+        var product = new ProductEntity("product", UserId, unitId,
             pricePerUnit ?? 10,
             catalogId ?? null,
-            availableInStock ?? 10, 
-            pictureUri ?? string.Empty, 
-            pictureFilename ?? string.Empty, 
+            availableInStock ?? 10,
+            pictureUri ?? string.Empty,
+            pictureFilename ?? string.Empty,
             description ?? string.Empty);
         return product;
     }

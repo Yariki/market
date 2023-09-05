@@ -10,26 +10,26 @@ internal static class SeedData
     public static readonly Guid Unit1Id1 = Guid.Parse("4C587EE3-25DC-424E-826B-390534E67DD9");
 
     public static readonly Guid Unit1Id2 = Guid.Parse("1E093B6D-0903-49B5-8E93-B03CB59DF773");
-    
-    private static Domain.Catalog.Catalog catalog1 = new Domain.Catalog.Catalog()
+
+    private static Domain.Catalogs.Catalog catalog1 = new Domain.Catalogs.Catalog()
     {
         Id = Catalog1Id,
         Name = "Catalog 1",
         Description = string.Empty
     };
-    
-    private static Domain.Catalog.Catalog catalog2 = new Domain.Catalog.Catalog()
+
+    private static Domain.Catalogs.Catalog catalog2 = new Domain.Catalogs.Catalog()
     {
         Id = Catalog2Id,
         Name = "Catalog 2",
         Description = string.Empty
     };
-    
-     public static async Task SeedAdditionalDataAsync(IProductCatalogDbContext context)
-     {
-            await SeedCategoriesAsync(context);
-            await SeedUnitsAsync(context);
-     }
+
+    public static async Task SeedAdditionalDataAsync(IProductCatalogDbContext context)
+    {
+        await SeedCategoriesAsync(context);
+        await SeedUnitsAsync(context);
+    }
 
     private static async Task SeedCategoriesAsync(IProductCatalogDbContext context)
     {

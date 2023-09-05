@@ -1,11 +1,8 @@
 ﻿using FluentAssertions;
-using FluentValidation;
-using Market.Shared.Application.Exceptions;
 using Market.Shared.Integration.Tests;
-using Microsoft.Extensions.DependencyInjection.Unit.Commands.UpdateUnit;
 using NUnit.Framework;
-using Org.BouncyCastle.Asn1;
-using ProductCatalog.Application.UnitEntity.Commands.AddUnit;
+using ProductCatalog.Application.Units.Commands.AddUnit;
+using ProductCatalog.Application.Units.Queries;
 using static ProductCatalog.Application.IntegrationTests.AppicationTesting;
 
 namespace ProductCatalog.Application.IntegrationTests;
@@ -44,10 +41,10 @@ public class GetUnitsTests : BaseTestFixture
             Abbriviation = v1,
             Description = v2
         };
-        
+
         var unitId = await SendAsync(add);
 
-        return unitId;  
+        return unitId;
     }
 
 }

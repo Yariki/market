@@ -1,11 +1,11 @@
 ﻿using Market.Shared.Application.Interfaces;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
-using ProductCatalog.Infrastructure.Persistence;
-using ProductCatalog.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using ProductCatalog.Application.Common.Services;
+using ProductCatalog.Infrastructure.Persistence;
+using ProductCatalog.Infrastructure.Services;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -23,8 +23,7 @@ public static class ConfigureServices
         else
         {
             services.AddDbContext<ProductCatalogDbContext>(options =>
-                options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"),
-                    builder => builder.MigrationsAssembly(typeof(ProductCatalogDbContext).Assembly.FullName)));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         }
 
         services.AddScoped<IProductCatalogDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());

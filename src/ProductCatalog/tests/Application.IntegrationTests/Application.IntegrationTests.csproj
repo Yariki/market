@@ -25,6 +25,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\Shared\Market.Shared.Integration.Tests\Market.Shared.Integration.Tests.csproj" />
+        <ProjectReference Include="..\..\..\Shared\Market.Shared\Market.Shared.csproj" />
         <ProjectReference Include="..\..\API\API.csproj" />
     </ItemGroup>
 
