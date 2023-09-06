@@ -4,6 +4,9 @@ namespace ProductCatalog.Application.Product.Models;
 
 public class ProductDto : IMapFrom<ProductCatalog.Domain.Product.Product>
 {
+    
+    public Guid Id { get; set; }
+    
     public string Name { get; set; }
 
     public string Description { get; set; }

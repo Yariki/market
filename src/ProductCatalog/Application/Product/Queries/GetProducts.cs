@@ -26,10 +26,20 @@ public class GetProductsQueryHandler : IRequestHandler<GetProductsQuery, IEnumer
 
     public async Task<IEnumerable<ProductDto>> Handle(GetProductsQuery request, CancellationToken cancellationToken)
     {
-        return  await _productCatalogDbContext.Products
+        IQueryable<ProductCatalog.Domain.Product.Product> query = _productCatalogDbContext.Products
             .Include(p => p.SellUnits)
-            .ThenInclude(s => s.Unit)
-            .Where(x => x.CatalogId == request.CatalogId)
-            .ProjectTo<ProductDto>(_mapper.ConfigurationProvider).ToListAsync();
+            .ThenInclude(s => s.Unit);
+            
+        if (request.CatalogId != Guid.Empty)
+        {
+            query = query
+                .Where(x => x.CatalogId == request.CatalogId);
+        }            
+        
+        var products = await query
+            .ProjectTo<ProductDto>(_mapper.ConfigurationProvider)
+            .ToListAsync();
+
+        return products;
     }
 }
