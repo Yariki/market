@@ -39,6 +39,10 @@
 		<PackageReference Include="ZymLabs.NSwag.FluentValidation.AspNetCore" Version="0.6.2" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Models\Catalogs\" />
+    </ItemGroup>
+
     <!-- Auto-generated Open API specification and Angular TypeScript clients -->
     <PropertyGroup>
         <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
