@@ -1,8 +1,9 @@
 using AutoMapper.Internal;
 using Microsoft.AspNetCore.Mvc;
-using ProductCatalog.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using ProductCatalog.Infrastructure.Persistence;
+using Swashbuckle.AspNetCore.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -37,6 +38,7 @@ builder.Services.AddVersionedApiExplorer(setup =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -44,7 +46,7 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
-    
+
     var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
     // Initialise and seed database
     using (var scope = app.Services.CreateScope())
@@ -53,7 +55,7 @@ if (app.Environment.IsDevelopment())
         await initialiser.InitialiseAsync();
         await initialiser.SeedAsync();
     }
-
+    app.UseSwagger(new SwaggerOptions());
     app.UseSwaggerUI(options =>
     {
         foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions.Reverse())
@@ -64,7 +66,7 @@ if (app.Environment.IsDevelopment())
 
         options.RoutePrefix = string.Empty;
     });
-    
+
 }
 else
 {
@@ -80,4 +82,4 @@ app.MapControllers();
 app.Run();
 
 
-public partial class Program {}
+public partial class Program { }

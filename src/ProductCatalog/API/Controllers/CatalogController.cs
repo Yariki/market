@@ -11,6 +11,7 @@ namespace ProductCatalog.WebUI.Controllers;
 [ApiExceptionFilter]
 [Route("api/v{version:apiVersion}/catalog")]
 [ApiVersion("1.0")]
+[Produces("application/json")]
 public class CatalogController : ApiControllerBase
 {
 
@@ -19,7 +20,7 @@ public class CatalogController : ApiControllerBase
     {
         return Ok(await Mediator.Send(new GetCatalogsQuery()));
     }
-    
+
     [HttpPost]
     public async Task<ActionResult<Guid>> AddCatalog(AddCatalogCommand addCatalogCommand)
     {
@@ -42,6 +43,6 @@ public class CatalogController : ApiControllerBase
 
         return Ok();
     }
-    
-    
+
+
 }
