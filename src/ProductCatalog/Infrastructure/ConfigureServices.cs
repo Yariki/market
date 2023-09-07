@@ -32,11 +32,6 @@ public static class ConfigureServices
 
         services.AddTransient<IDateTime, DateTimeService>();
 
-        services.AddAuthentication()
-            .AddIdentityServerJwt();
-
-        services.AddAuthorization();
-
         return services;
     }
 }
