@@ -47,7 +47,7 @@ steps:
   displayName: 'Test Product Catalog'
   inputs:
     command: 'test'
-    projects: '**/ProductCatalog/tests/*.csproj'
+    projects: '**/*Tests.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
