@@ -26,20 +26,39 @@ steps:
     PROCESSOR_ARCHITECTURE: x64
 
 - script: docker pull $(imageName)
-  displayName: 'Docker pull...'
-
+  displayName: 'Docker pull images...'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build for Market'
+  displayName: 'Restore packages for Product Catalog'
+  inputs:
+    command: restore
+    projects: '$(solution)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Build Product Catalog'
+  inputs:
+    command: 'build'
+    projects: '$(project)'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Test Product Catalog'
+  inputs:
+    command: 'test'
+    projects: '**/ProductCatalog/tests/*.csproj'
+    arguments: '--configuration $(buildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Publish Product Catalog'
   inputs:
     command: 'publish'
+    publishWebProjects: true
+    zipAfterPublish: true
     projects: '$(project)'
-    publishWebProjects: True
-    zipAfterPublish: True
-    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained false'
-    
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+
 - task: PublishPipelineArtifact@1
-  displayName: Publish Pipeline Artifacts for Market
+  displayName: 'Publish Pipeline Artifact for Product Catalog'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
     artifactName: 'Market'
