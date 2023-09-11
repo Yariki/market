@@ -19,8 +19,9 @@ public class CustomWebApplicationFactory<TProgram> : WebApplicationFactory<TProg
 
     public CustomWebApplicationFactory()
     {
-        _testcontainer = new MsSqlBuilder().Build();
-
+        _testcontainer = new MsSqlBuilder()
+            .WithImage("mcr.microsoft.com/mssql/server:2019-latest")
+            .Build();
         _testcontainer.StartAsync().GetAwaiter().GetResult();
     }
 
