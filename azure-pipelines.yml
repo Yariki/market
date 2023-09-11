@@ -21,6 +21,8 @@ steps:
 - task: UseDotNet@2
   inputs:
     packageType: 'sdk'
+    performMultiLevelLookup: true
+    includePreviewVersions: true
     version: '7.0.x'
   env:
     PROCESSOR_ARCHITECTURE: x64
