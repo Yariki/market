@@ -7,32 +7,39 @@ trigger:
 - master
 
 pool:
-  vmImage: 'windows-latest'
+  vmImage: 'ubuntu-latest'
 
 variables:
   solution: '**/ProductCatalog.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
   imageName: 'mcr.microsoft.com/mssql/server:2019-latest'
+  project: '**/API.csproj'
 
 steps:
-- task: NuGetToolInstaller@1
 
-- task: NuGetCommand@2
+- task: UseDotNet@2
   inputs:
-    restoreSolution: '$(solution)'
+    packageType: 'sdk'
+    version: '7.0.x'
+  env:
+    PROCESSOR_ARCHITECTURE: x64
 
 - script: docker pull $(imageName)
   displayName: 'Docker pull...'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    msbuildArgs: '/p:WebPublishMethod=Package /p:PackageAsSingleFile=true /p:SkipInvalidConfigurations=true /p:DesktopBuildPackageLocation="$(build.artifactStagingDirectory)\WebApp.zip"'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
 
-- task: VSTest@2
+- task: DotNetCoreCLI@2
+  displayName: 'Build for Market'
   inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+    command: 'publish'
+    projects: '$(project)'
+    publishWebProjects: True
+    zipAfterPublish: True
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory) --self-contained false'
+    
+- task: PublishPipelineArtifact@1
+  displayName: Publish Pipeline Artifacts for Market
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)' 
+    artifactName: 'Market'
