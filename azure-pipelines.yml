@@ -13,6 +13,7 @@ variables:
   solution: '**/ProductCatalog.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
+  imageName: 'mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04'
 
 steps:
 - task: NuGetToolInstaller@1
@@ -20,6 +21,9 @@ steps:
 - task: NuGetCommand@2
   inputs:
     restoreSolution: '$(solution)'
+
+- script: docker pull $(imageName)
+  displayName: 'Docker pull...'
 
 - task: VSBuild@1
   inputs:
