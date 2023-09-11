@@ -63,4 +63,4 @@ steps:
   displayName: 'Publish Pipeline Artifact for Product Catalog'
   inputs:
     targetPath: '$(Build.ArtifactStagingDirectory)' 
-    artifactName: 'Market'
+    artifactName: 'ProductCatalog'
