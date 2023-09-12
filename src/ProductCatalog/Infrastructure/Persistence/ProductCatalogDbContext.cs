@@ -2,6 +2,8 @@
 using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Application.Common.Services;
 using ProductCatalog.Domain.Catalogs;
@@ -18,9 +20,14 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
     public ProductCatalogDbContext(
         DbContextOptions<ProductCatalogDbContext> options,
         IMediator mediator,
-        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor) 
+        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor, 
+        IHttpContextAccessor accessor) 
         : base(options, mediator, auditableEntitySaveChangesInterceptor)
     {
+#if !DEBUG
+        var conn = Database.GetDbConnection() as SqlConnection;
+        conn.AccessToken = accessor.HttpContext.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
+#endif
     }
 
     public DbSet<Product> Products => Set<Product>();
