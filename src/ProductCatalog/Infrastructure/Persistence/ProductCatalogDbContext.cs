@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
@@ -26,7 +27,10 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
     {
 #if !DEBUG
         var conn = Database.GetDbConnection() as SqlConnection;
-        conn.AccessToken = accessor.HttpContext.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
+        if(conn != null)
+        {
+            conn.AccessToken = accessor?.HttpContext?.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
+        }
 #endif
     }
 
