@@ -23,7 +23,8 @@ public static class ConfigureServices
         else
         {
             services.AddDbContext<ProductCatalogDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"), 
+                options => options.EnableRetryOnFailure()));
         }
 
         services.AddScoped<IProductCatalogDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());
