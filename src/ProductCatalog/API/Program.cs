@@ -15,9 +15,9 @@ builder.Services.AddApiServices();
 builder.Services.AddControllers();
 
 builder.Services.AddAutoMapper(mce =>
-    {
-        mce.Internal().MethodMappingEnabled = false;
-    }, AppDomain.CurrentDomain.GetAssemblies());
+{
+    mce.Internal().MethodMappingEnabled = false;
+}, AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddApiVersioning(opt =>
 {
@@ -46,7 +46,24 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
+}
+else
+{
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+    app.UseHsts();
+}
 
+await SetupSwagger(app);
+
+app.UseHealthChecks("/health");
+app.UseHttpsRedirection();
+
+app.MapControllers();
+
+app.Run();
+
+static async Task SetupSwagger(WebApplication app)
+{
     var apiVersionDescriptionProvider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
     // Initialise and seed database
     using (var scope = app.Services.CreateScope())
@@ -66,20 +83,6 @@ if (app.Environment.IsDevelopment())
 
         options.RoutePrefix = string.Empty;
     });
-
 }
-else
-{
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
-}
-
-app.UseHealthChecks("/health");
-app.UseHttpsRedirection();
-
-app.MapControllers();
-
-app.Run();
-
 
 public partial class Program { }
