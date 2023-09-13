@@ -26,11 +26,11 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
         : base(options, mediator, auditableEntitySaveChangesInterceptor)
     {
 #if !DEBUG
-        var conn = Database.GetDbConnection() as SqlConnection;
-        if(conn != null)
-        {
-            conn.AccessToken = accessor?.HttpContext?.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
-        }
+        // var conn = Database.GetDbConnection() as SqlConnection;
+        // if(conn != null)
+        // {
+        //     conn.AccessToken = accessor?.HttpContext?.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
+        // }
 #endif
     }
 
