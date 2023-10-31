@@ -1,5 +1,9 @@
 ﻿using System.Reflection;
+<<<<<<< HEAD
 using System.Security.Cryptography.X509Certificates;
+=======
+using Market.Shared.Application.Interfaces;
+>>>>>>> 754124c (added tenant filter for products)
 using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
@@ -17,21 +21,15 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
 {
     private readonly IMediator _mediator;
     private readonly AuditableEntitySaveChangesInterceptor _auditableEntitySaveChangesInterceptor;
+    private readonly ITenantProvider _tenantProvider;
 
     public ProductCatalogDbContext(
         DbContextOptions<ProductCatalogDbContext> options,
         IMediator mediator,
-        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor, 
-        IHttpContextAccessor accessor) 
+        AuditableEntitySaveChangesInterceptor auditableEntitySaveChangesInterceptor, ITenantProvider tenantProvider) 
         : base(options, mediator, auditableEntitySaveChangesInterceptor)
     {
-#if !DEBUG
-        // var conn = Database.GetDbConnection() as SqlConnection;
-        // if(conn != null)
-        // {
-        //     conn.AccessToken = accessor?.HttpContext?.Request.Headers["X-MS-TOKEN-AAD-ACCESS-TOKEN"];
-        // }
-#endif
+        _tenantProvider = tenantProvider;
     }
 
     public DbSet<Product> Products => Set<Product>();
@@ -45,7 +43,14 @@ public class ProductCatalogDbContext : ApplicationDbContext<ProductCatalogDbCont
     protected override void OnModelCreating(ModelBuilder builder)
     {
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        
+        var tenantId = _tenantProvider.GetTenantId();
 
+        if (!string.IsNullOrEmpty(tenantId))
+        {
+            builder.Entity<Product>().HasQueryFilter(p => EF.Property<string?>(p, "CreatedBy") == tenantId);    
+        }
+        
         base.OnModelCreating(builder);
     }
 
