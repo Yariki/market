@@ -1,9 +1,6 @@
 ﻿using System.Reflection;
-<<<<<<< HEAD
 using System.Security.Cryptography.X509Certificates;
-=======
 using Market.Shared.Application.Interfaces;
->>>>>>> 754124c (added tenant filter for products)
 using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
