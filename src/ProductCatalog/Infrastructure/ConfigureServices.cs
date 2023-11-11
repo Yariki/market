@@ -1,11 +1,13 @@
 ﻿using Market.Shared.Application.Interfaces;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
+using Market.Shared.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Identity.Client;
 using ProductCatalog.Application.Common.Services;
 using ProductCatalog.Infrastructure.Persistence;
-using ProductCatalog.Infrastructure.Services;
+using DateTimeService = ProductCatalog.Infrastructure.Services.DateTimeService;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -28,10 +30,7 @@ public static class ConfigureServices
         }
 
         services.AddScoped<IProductCatalogDbContext>(provider => provider.GetRequiredService<ProductCatalogDbContext>());
-
         services.AddScoped<ApplicationDbContextInitialiser>();
-
-        services.AddTransient<IDateTime, DateTimeService>();
 
         return services;
     }
