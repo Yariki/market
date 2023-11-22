@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Market.Shared.Domain;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ProductCatalog.Domain.Common;
 
-namespace ProductCatalog.Infrastructure.Persistence.Configurations;
+namespace Market.Shared.Infrastructure.Persistance.Configuration;
 
-public class BaseProductConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseIdEntity
+public class BaseConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> where TEntity : BaseIdEntity
 {
     public void Configure(EntityTypeBuilder<TEntity> builder)
     {

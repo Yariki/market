@@ -34,4 +34,8 @@
         <PackageReference Include="System.Collections.Immutable" Version="7.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

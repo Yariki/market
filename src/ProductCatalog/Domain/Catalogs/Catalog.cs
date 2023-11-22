@@ -1,4 +1,4 @@
-﻿using ProductCatalog.Domain.Common;
+﻿using Market.Shared.Domain;
 
 namespace ProductCatalog.Domain.Catalogs;
 

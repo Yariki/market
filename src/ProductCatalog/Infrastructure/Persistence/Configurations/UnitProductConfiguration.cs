@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Market.Shared.Infrastructure.Persistance.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductCatalog.Domain.Product;
 
 namespace ProductCatalog.Infrastructure.Persistence.Configurations;
 
-public class UnitProductConfiguration : BaseProductConfiguration<Unit>
+public class UnitProductConfiguration : BaseConfiguration<Unit>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Unit> builder)
     {

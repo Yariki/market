@@ -114,14 +114,6 @@ builder.Services.AddOpenIddict()
 builder.Services.AddHostedService<DatabaseSeedWorker>();
 
 builder.Services.AddAuthentication();
-    //.AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
-    //{
-    //    // We are leaving the default auth scheme
-    //    //options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-
-    //    options.ClientId = builder.Configuration["Providers:Google:ClientId"]!;
-    //    options.ClientSecret = builder.Configuration["Providers:Google:ClientSecret"]!;
-    //});
 
 // CORS policy to allow SwaggerUI and React clients
 builder.Services.AddCors(
@@ -132,9 +124,8 @@ builder.Services.AddCors(
             {
                 policy
                     .WithOrigins(
-                        builder.Configuration.GetServiceUri("weather-api")!.ToString().TrimEnd('/'),
-                        builder.Configuration.GetServiceUri("weather-summary-api")!.ToString().TrimEnd('/'),
-                        builder.Configuration.GetServiceUri("react-client")!.ToString().TrimEnd('/'))
+                        builder.Configuration.GetServiceUri("product-catalog-api")!.ToString().TrimEnd('/'),
+                        builder.Configuration.GetServiceUri("ui-client")!.ToString().TrimEnd('/'))
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
