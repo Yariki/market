@@ -6,7 +6,7 @@ namespace Market.Shared;
 
 public static class SharedServices
 {
-    public static IServiceCollection AddSharedServices(this IServiceCollection services)
+    public static IServiceCollection AddSharedDependencies(this IServiceCollection services)
     {
         services.AddScoped<IDateTime, DateTimeService>();
         services.AddScoped<ITenantProvider, TenantProvider>();

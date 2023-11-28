@@ -9,7 +9,7 @@ using Swashbuckle.AspNetCore.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddSharedServices();
+builder.Services.AddSharedDependencies();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddApiServices();

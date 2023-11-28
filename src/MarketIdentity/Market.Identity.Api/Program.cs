@@ -1,13 +1,14 @@
-using Auth;
 using Microsoft.EntityFrameworkCore;
-using Auth.Data;
+using AutoMapper.Internal;
 using Market.Identity.Api;
 using Market.Identity.Api.Data;
 using Market.Identity.Api.Email;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.IdentityModel.Logging;
 using static OpenIddict.Abstractions.OpenIddictConstants;
 using Quartz;
+using Microsoft.AspNetCore.Identity;
+using Market.Shared;
+using Market.Shared.Services;
 
 var builder = WebApplication.CreateBuilder();
 if (builder.Environment.IsEnvironment("Docker"))
@@ -23,16 +24,25 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlServer(connectionString,
             optionsBuilder => { optionsBuilder.EnableRetryOnFailure(10, TimeSpan.FromSeconds(30), null); });
-    options.UseOpenIddict();
+    //options.UseOpenIddict();
 });
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddAutoMapper(mce =>
+{
+    mce.Internal().MethodMappingEnabled = false;
+}, AppDomain.CurrentDomain.GetAssemblies());
 
 // Register ASP.NET Core Identity services
 builder.Services
     .AddDefaultIdentity<AuthUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<AuthRole>()
+    .AddRoleManager<RoleManager<AuthRole>>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddEmail(builder.Configuration);
 builder.Services.AddRazorPages();
+builder.Services.AddSharedDependencies();
+builder.Services.AddSharedServices();
 
 // OpenIddict offers native integration with Quartz.NET to perform scheduled tasks
 // (like pruning orphaned authorizations/tokens from the database) at regular intervals.
@@ -114,6 +124,7 @@ builder.Services.AddOpenIddict()
 builder.Services.AddHostedService<DatabaseSeedWorker>();
 
 builder.Services.AddAuthentication();
+builder.Services.AddApplicationServices();
 
 // CORS policy to allow SwaggerUI and React clients
 builder.Services.AddCors(
@@ -159,3 +170,6 @@ app.MapDefaultControllerRoute();
 app.MapRazorPages();
 
 app.Run();
+
+
+public partial class Program { }

@@ -6,15 +6,14 @@ namespace Market.Identity.Api.Data;
 
 public class AuthUser : IdentityUser
 {
-    private List<CardInfo> _cardInfos;
+    private List<CardInfo> _cardInfos = new();
 
-    public AuthUser()
-    {
-        _cardInfos = new List<CardInfo>();
-    }
-    
     public string ProfileImageName { get; set; } = string.Empty;
-
+    
+    public string FirstName { get; set; }
+    
+    public string LastName { get; set; }
+    
     public IReadOnlyCollection<CardInfo> Cards => _cardInfos;
     
     public void AddCard(CardInfo cardInfo)
@@ -34,4 +33,5 @@ public class AuthUser : IdentityUser
         _cardInfos.Remove(card);
     }
 }
+
 
