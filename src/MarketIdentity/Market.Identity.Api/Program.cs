@@ -1,14 +1,14 @@
-using Microsoft.EntityFrameworkCore;
 using AutoMapper.Internal;
 using Market.Identity.Api;
 using Market.Identity.Api.Data;
 using Market.Identity.Api.Email;
-using Microsoft.IdentityModel.Logging;
-using static OpenIddict.Abstractions.OpenIddictConstants;
-using Quartz;
-using Microsoft.AspNetCore.Identity;
 using Market.Shared;
 using Market.Shared.Services;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Logging;
+using Quartz;
+using static OpenIddict.Abstractions.OpenIddictConstants;
 
 var builder = WebApplication.CreateBuilder();
 if (builder.Environment.IsEnvironment("Docker"))
