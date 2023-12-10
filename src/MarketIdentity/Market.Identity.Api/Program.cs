@@ -5,6 +5,8 @@ using Market.Identity.Api.Email;
 using Market.Shared;
 using Market.Shared.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Logging;
 using Quartz;
@@ -55,6 +57,23 @@ builder.Services.AddQuartz(options =>
 
 // Register the Quartz.NET service and configure it to block shutdown until jobs are complete.
 builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
+
+builder.Services.AddApiVersioning(opt =>
+{
+    opt.ReportApiVersions = true;
+    opt.AssumeDefaultVersionWhenUnspecified = true;
+    opt.DefaultApiVersion = new ApiVersion(1, 0);
+    opt.ApiVersionReader = ApiVersionReader.Combine(
+            new UrlSegmentApiVersionReader(),
+            new HeaderApiVersionReader("x-api-version"),
+            new QueryStringApiVersionReader("x-api-version")
+        );
+});
+builder.Services.AddVersionedApiExplorer(opt =>
+{
+    opt.GroupNameFormat = "'v'VVV";
+    opt.SubstituteApiVersionInUrl = true;
+});
 
 builder.Services.AddOpenIddict()
 
