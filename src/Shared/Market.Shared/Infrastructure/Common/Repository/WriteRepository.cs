@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
+using Market.Shared.Application.Extensions;
 using Market.Shared.Application.Interfaces;
 using Market.Shared.Domain;
-using Market.Shared.Infrastructure.Common.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Shared.Infrastructure.Common.Repository;

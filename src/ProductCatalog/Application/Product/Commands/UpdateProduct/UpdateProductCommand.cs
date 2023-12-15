@@ -1,5 +1,5 @@
 ﻿using Market.Shared.Application.Exceptions;
-using Market.Shared.Infrastructure.Common.Extensions;
+using Market.Shared.Application.Extensions;
 using MediatR;
 using ProductCatalog.Application.Common.Services;
 using ProductCatalog.Application.Product.Models;

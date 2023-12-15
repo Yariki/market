@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Infrastructure.Common.Extensions;
+using Market.Shared.Application.Extensions;
 using MediatR;
 using ProductCatalog.Application.Common.Services;
 

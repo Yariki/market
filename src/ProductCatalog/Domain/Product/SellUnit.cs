@@ -29,6 +29,11 @@ public class SellUnit : BaseIdEntity
     {
         return Scalar * product.PricePerUnit;
     }
+
+    public string GetSellUnitName()
+    {
+        return $"{Unit.Abbriviation} ({Scalar})";   
+    }
     
     public static SellUnit CreateNew(Guid unitId, decimal scalar)
     {

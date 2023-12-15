@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Market.Identity.Api.Data;
 using Market.Shared.Application.Exceptions;
-using Market.Shared.Infrastructure.Common.Extensions;
+using Market.Shared.Application.Extensions;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 

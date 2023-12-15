@@ -1,5 +1,5 @@
-﻿using Market.Shared.Domain;
-using Market.Shared.Infrastructure.Common.Extensions;
+﻿using Market.Shared.Application.Extensions;
+using Market.Shared.Domain;
 using Microsoft.AspNetCore.Identity;
 
 namespace Market.Identity.Api.Data;

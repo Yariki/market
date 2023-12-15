@@ -1,5 +1,5 @@
-﻿using Market.Shared.Application.Interfaces;
-using Market.Shared.Infrastructure.Common.Extensions;
+﻿using Market.Shared.Application.Extensions;
+using Market.Shared.Application.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace Market.Shared.Infrastructure.Common.Repository;
