@@ -1,6 +1,5 @@
 ﻿using Basket.Api.Services;
 using Basket.Application.Common.Interfaces;
-using Basket.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
 using NSwag.Generation.Processors.Security;

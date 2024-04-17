@@ -1,5 +1,4 @@
 ﻿using Basket.Application.Common.Interfaces;
-using Basket.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -16,22 +15,15 @@ using static Testing;
 internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
 {
 
-    private readonly MsSqlContainer _msSqlContainer;
 
     public CustomWebApplicationFactory()
     {
-        _msSqlContainer =  new MsSqlBuilder()
-            .WithImage("mcr.microsoft.com/mssql/server:2019-latest")
-            .Build();
     }
 
     protected override void Dispose(bool disposing)
     {
-        _msSqlContainer.DisposeAsync().GetAwaiter().GetResult();
         base.Dispose(disposing);
     }
-
-    public string? ConnectionString => _msSqlContainer?.GetConnectionString();
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
@@ -51,12 +43,6 @@ internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
                 .Remove<ICurrentUserService>()
                 .AddTransient(provider => Mock.Of<ICurrentUserService>(s =>
                     s.UserId == GetCurrentUserId()));
-
-            services
-                .Remove<DbContextOptions<ApplicationDbContext>>()
-                .AddDbContext<ApplicationDbContext>((sp, options) =>
-                    options.UseSqlServer(ConnectionString,
-                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
             this.ConfigureServices(builder, services);
         });

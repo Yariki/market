@@ -1,4 +1,4 @@
-﻿using Basket.Infrastructure.Persistence;
+﻿using Basket.Application.Common.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -24,11 +24,6 @@ public partial class Testing
         _factory = new CustomWebApplicationFactory();
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _configuration = _factory.Services.GetRequiredService<IConfiguration>();
-
-        _checkpoint = Respawner.CreateAsync(_factory.ConnectionString!, new RespawnerOptions
-        {
-            TablesToIgnore = new Respawn.Graph.Table[] { "__EFMigrationsHistory" }
-        }).GetAwaiter().GetResult();
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -56,46 +51,35 @@ public partial class Testing
 
     public static async Task ResetState()
     {
-        try
-        {
-            await _checkpoint.ResetAsync(_factory.ConnectionString!);
-        }
-        catch (Exception)
-        {
-        }
-
-        _currentUserId = null;
+        throw new NotImplementedException();
     }
 
-    public static async Task<TEntity?> FindAsync<TEntity>(params object[] keyValues)
-        where TEntity : class
+    public static async Task<Domain.Entities.Basket?> FindAsync(string userId)
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var basketRepository = scope.ServiceProvider.GetRequiredService<IBasketRepository>();
 
-        return await context.FindAsync<TEntity>(keyValues);
+        return await basketRepository.GetBasketAsync(userId) ;
     }
 
-    public static async Task AddAsync<TEntity>(TEntity entity)
-        where TEntity : class
+    public static async Task UpdateAsync(Domain.Entities.Basket entity)
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var basketRepository = scope.ServiceProvider.GetRequiredService<IBasketRepository>();
 
-        context.Add(entity);
+        await basketRepository.UpdateBasketAsync(entity);
 
-        await context.SaveChangesAsync();
     }
 
-    public static async Task<int> CountAsync<TEntity>() where TEntity : class
+    public static async Task DeleteAsync(string userId)
     {
         using var scope = _scopeFactory.CreateScope();
 
-        var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var basketRepository = scope.ServiceProvider.GetRequiredService<IBasketRepository>();
 
-        return await context.Set<TEntity>().CountAsync();
+        await basketRepository.DeleteBasketAsync(userId);
     }
 
     [OneTimeTearDown]

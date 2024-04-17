@@ -1,9 +1,10 @@
 ﻿using System.Runtime.Serialization;
 using AutoMapper;
+using Basket.Application.Basket.Models;
 using Basket.Application.Common.Mappings;
 using Basket.Application.Common.Models;
-using Basket.Domain.Entities;
 using NUnit.Framework;
+using BasketEntity = Basket.Domain.Entities.Basket;
 
 namespace Basket.Application.UnitTests.Common.Mappings;
 
@@ -27,7 +28,7 @@ public class MappingTests
     }
 
     [Test]
-    [TestCase(typeof(SampleItem), typeof(LookupDto))]
+    [TestCase(typeof(BasketEntity), typeof(BasketDto))]
     public void ShouldSupportMappingFromSourceToDestination(Type source, Type destination)
     {
         var instance = GetInstanceOf(source);
