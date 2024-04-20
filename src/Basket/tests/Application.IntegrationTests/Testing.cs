@@ -16,7 +16,8 @@ public partial class Testing
     private static IConfiguration _configuration = null!;
     private static IServiceScopeFactory _scopeFactory = null!;
     private static Respawner _checkpoint = null!;
-    private static string? _currentUserId;
+    public static string? CurrentUserId = "BF09AF4F-3115-4C7C-A17E-939ACC3B5AF3";
+    private static RedisInside.Redis  _redis = null!;
 
     [OneTimeSetUp]
     public void RunBeforeAnyTests()
@@ -24,6 +25,7 @@ public partial class Testing
         _factory = new CustomWebApplicationFactory();
         _scopeFactory = _factory.Services.GetRequiredService<IServiceScopeFactory>();
         _configuration = _factory.Services.GetRequiredService<IConfiguration>();
+        _redis = new RedisInside.Redis(config => config.Port(6379));
     }
 
     public static async Task<TResponse> SendAsync<TResponse>(IRequest<TResponse> request)
@@ -46,7 +48,7 @@ public partial class Testing
 
     public static string? GetCurrentUserId()
     {
-        return _currentUserId;
+        return CurrentUserId;
     }
 
     public static async Task ResetState()
@@ -85,5 +87,6 @@ public partial class Testing
     [OneTimeTearDown]
     public void RunAfterAnyTests()
     {
+        _redis?.Dispose();
     }
 }

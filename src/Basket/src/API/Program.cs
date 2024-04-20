@@ -6,6 +6,8 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
 
+builder.Services.AddControllers();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -21,7 +23,7 @@ else
     app.UseHsts();
 }
 
-app.UseHealthChecks("/health");
+//app.UseHealthChecks("/health"); // TODO: add health checks
 app.UseHttpsRedirection();
 
 app.UseSwaggerUi3(settings =>

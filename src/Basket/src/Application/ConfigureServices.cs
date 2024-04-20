@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using AutoMapper.Internal;
 using Basket.Application.Common.Behaviours;
 using FluentValidation;
 using MediatR;
@@ -9,7 +10,8 @@ public static class ConfigureServices
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddAutoMapper(Assembly.GetExecutingAssembly());
+        services.AddAutoMapper(
+            cfg => cfg.Internal().MethodMappingEnabled = false, Assembly.GetExecutingAssembly());
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         services.AddMediatR(cfg =>
         {

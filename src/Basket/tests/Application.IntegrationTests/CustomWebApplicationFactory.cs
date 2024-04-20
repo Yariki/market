@@ -5,8 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Testcontainers.MsSql;
-
 
 namespace Basket.Application.IntegrationTests;
 

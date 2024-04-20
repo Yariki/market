@@ -20,18 +20,9 @@ public static class ConfigureServices
             options.InstanceName = "Basket_";
         });
         
-        //services.AddIdentityServer()
-        //    .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
-
         services.AddTransient<IDateTime, DateTimeService>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         
-        // services.AddAuthentication()
-        //     .AddIdentityServerJwt();
-
-        // services.AddAuthorization(options =>
-        //     options.AddPolicy("CanPurge", policy => policy.RequireRole("Administrator")));
-
         return services;
     }
 }
