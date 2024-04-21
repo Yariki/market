@@ -8,6 +8,8 @@ builder.Services.AddWebUIServices();
 
 builder.Services.AddControllers();
 
+builder.Services.AddHealthChecks();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -15,6 +17,9 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseMigrationsEndPoint();
+
+    app.UseOpenApi();
+    app.UseSwaggerUi3();
    
 }
 else
@@ -23,14 +28,8 @@ else
     app.UseHsts();
 }
 
-//app.UseHealthChecks("/health"); // TODO: add health checks
+app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
-
-app.UseSwaggerUi3(settings =>
-{
-    settings.Path = "/api";
-    settings.DocumentPath = "/api/specification.json";
-});
 
 app.UseRouting();
 
