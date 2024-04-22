@@ -48,6 +48,20 @@ public class DeleteBasketCommandTests : BaseTestFixture
         var basket = await FindAsync(CurrentUserId);
 
         basket.Should().NotBeNull();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         basket.UserId.Should().Be(CurrentUserId);
         basket.Items.Count.Should().Be(1);
 

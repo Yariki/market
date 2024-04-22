@@ -1,10 +1,13 @@
 
+using Market.Shared.CorrelationId;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
+builder.Services.AddCorrelationIdServices();
 
 builder.Services.AddControllers();
 
@@ -27,6 +30,8 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.AddCorrelationMiddleware();
 
 app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
