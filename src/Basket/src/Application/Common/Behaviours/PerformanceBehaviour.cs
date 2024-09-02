@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using Basket.Application.Common.Interfaces;
+using Market.Shared.Application.Interfaces;
 using MediatR;
 using Microsoft.Extensions.Logging;
 

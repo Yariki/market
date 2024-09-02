@@ -47,7 +47,7 @@ public class DatabaseSeedWorker : IHostedService
             await applicationManager.CreateAsync(new OpenIddictApplicationDescriptor
             {
                 ClientId = clientId,
-                DisplayName = "UI client",
+                DisplayName = "UI Client",
                 RedirectUris =
                 {
                     new Uri($"{clientUrl}signin-oidc")
@@ -78,7 +78,7 @@ public class DatabaseSeedWorker : IHostedService
             await applicationManager.CreateAsync(new OpenIddictApplicationDescriptor
             {
                 ClientId = clientId,
-                DisplayName = "React client",
+                DisplayName = "UI Client Admin",
                 RedirectUris =
                 {
                     new Uri($"{adminUiUrl}signin-oidc")

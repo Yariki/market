@@ -15,6 +15,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\Market.Shared\Market.Shared.csproj" />
         <ProjectReference Include="..\Domain\Basket.Domain.csproj" />
     </ItemGroup>
 

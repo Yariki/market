@@ -1,4 +1,5 @@
 ﻿using Basket.Application.Common.Interfaces;
+using Market.Shared.Application.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;

@@ -20,7 +20,6 @@ public static class ConfigureServices
             options.InstanceName = "Basket_";
         });
         
-        services.AddTransient<IDateTime, DateTimeService>();
         services.AddScoped<IBasketRepository, BasketRepository>();
         
         return services;

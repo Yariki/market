@@ -1,4 +1,5 @@
 ﻿using Basket.Application.Common.Interfaces;
+using Market.Shared.Application.Interfaces;
 using MediatR.Pipeline;
 using Microsoft.Extensions.Logging;
 
