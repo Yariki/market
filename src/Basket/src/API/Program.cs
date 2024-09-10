@@ -1,4 +1,5 @@
 
+using Market.EventBus.RabbitMq;
 using Market.Shared.CorrelationId;
 using Market.Shared.Services;
 
@@ -10,6 +11,9 @@ builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddWebUIServices();
 builder.Services.AddCorrelationIdServices();
+
+builder.Services.AddServiceBus(builder.Configuration);
+builder.Services.AddEventBusSender();
 
 builder.Services.AddControllers();
 

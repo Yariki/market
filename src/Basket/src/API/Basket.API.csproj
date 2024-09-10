@@ -10,6 +10,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\Market.EventBus.RabbitMq\Market.EventBus.RabbitMq.csproj" />
+        <ProjectReference Include="..\..\..\Shared\Market.EventBus\Market.EventBus.csproj" />
         <ProjectReference Include="..\..\..\Shared\Market.Shared.CorrelationId\Market.Shared.CorrelationId.csproj" />
         <ProjectReference Include="..\..\..\Shared\Market.Shared.Services\Market.Shared.Services.csproj" />
         <ProjectReference Include="..\Application\Basket.Application.csproj" />

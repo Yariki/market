@@ -4,22 +4,22 @@ public abstract class BaseIntegrationEvent
 {
     public Guid Id { get; private set; }
 
-    public Guid CorrelationId { get; private set; }
+    public string CorrelationId { get; private set; }
 
     public DateTime CreationDate { get; private set; }
 
-    public BaseIntegrationEvent()
+    protected BaseIntegrationEvent()
     {
         Id = Guid.NewGuid();
         CreationDate = DateTime.UtcNow;
     }
 
-    public BaseIntegrationEvent(Guid correlationId) : this()
+    protected BaseIntegrationEvent(string correlationId) : this()
     {
         CorrelationId = correlationId;
     }
 
-    public void SetCorrelationId(Guid correlationId)
+    public void SetCorrelationId(string correlationId)
     {
         CorrelationId = correlationId;
     }
