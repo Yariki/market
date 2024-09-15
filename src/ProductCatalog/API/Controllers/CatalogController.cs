@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Market.Shared.Application.Security;
+using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Application.Catalogs.Commands.AddCatalog;
 using ProductCatalog.Application.Catalogs.Commands.DeleteCatalog;
 using ProductCatalog.Application.Catalogs.Commands.UpdateCatalog;
@@ -12,6 +13,7 @@ namespace ProductCatalog.WebUI.Controllers;
 [Route("api/v{version:apiVersion}/catalog")]
 [ApiVersion("1.0")]
 [Produces("application/json")]
+//[Authorize(Policy = "product-catalog-api")]
 public class CatalogController : ApiControllerBase
 {
 

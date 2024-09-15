@@ -4,6 +4,7 @@ using Basket.Application.Basket.Models;
 using Basket.Application.Basket.Queries;
 using Market.EventBus;
 using Market.Shared.CorrelationId;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Http;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection.EventBus;
 namespace Basket.API.Controllers;
 
 
+//[Authorize(Policy = "basket-api")]
 public class BasketController : ApiControllerBase
 {
     public readonly IEventSender _eventSender;

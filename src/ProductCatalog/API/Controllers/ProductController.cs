@@ -12,6 +12,7 @@ namespace API.Controllers;
 [Route("api/v{version:apiVersion}/product")]
 [ApiVersion("1.0")]
 [Produces("application/json")]
+//[Authorize(Policy = "product-catalog-api")]
 public class ProductController : ApiControllerBase
 {
     [HttpGet]

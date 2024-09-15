@@ -2,6 +2,8 @@
 using Market.EventBus.RabbitMq;
 using Market.Shared.CorrelationId;
 using Market.Shared.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,41 @@ builder.Services.AddEventBusSender();
 builder.Services.AddControllers();
 
 builder.Services.AddHealthChecks();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.Authority = builder.Configuration.GetServiceUri("identity-api")!.ToString().TrimEnd('/');
+        options.MapInboundClaims = true;
+        options.Audience = "basket-api";
+        options.BackchannelHttpHandler = new HttpClientHandler()
+        {
+            ServerCertificateCustomValidationCallback =
+                HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+        };
+        options.TokenValidationParameters = new TokenValidationParameters() { ValidateAudience = true };
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("basket-api", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "basket-api");
+    });
+});
+
+// CORS policy to allow the React sample client to call the API
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(
+        "default", policy =>
+        {
+            policy
+                .AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
+});
 
 var app = builder.Build();
 
@@ -43,6 +80,7 @@ app.UseHealthChecks("/health");
 app.UseHttpsRedirection();
 
 app.UseRouting();
+app.UseCors("default");
 
 app.MapControllerRoute(
     name: "default",

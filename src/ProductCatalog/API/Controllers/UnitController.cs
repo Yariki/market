@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProductCatalog.Application.Units.Commands.AddUnit;
 using ProductCatalog.Application.Units.Commands.DeleteUnit;
 using ProductCatalog.Application.Units.Commands.UpdateUnit;
@@ -13,6 +14,7 @@ namespace API.Controllers;
 [Route("api/v{version:apiVersion}/unit")]
 [ApiVersion("1.0")]
 [Produces("application/json")]
+//[Authorize(Policy = "product-catalog-api")]
 public class UnitController : ApiControllerBase
 {
     [HttpGet]

@@ -8,6 +8,7 @@ namespace Market.Identity.Api;
 public class DatabaseSeedWorker : IHostedService
 {
     private const string ProductCatalogApiScope = Permissions.Prefixes.Scope + "product-catalog-api";
+    private const string BasketApiScope = Permissions.Prefixes.Scope + "basket-api";
 
     private readonly IServiceProvider _serviceProvider;
     private readonly IConfiguration _configuration;
@@ -21,7 +22,6 @@ public class DatabaseSeedWorker : IHostedService
     public async Task StartAsync(CancellationToken cancellationToken)
     {
         var clientUrl = _configuration.GetServiceUri("ui-client")!.ToString();
-        var adminUiUrl = _configuration.GetServiceUri("admin-ui-client")!.ToString();
 
         await using var scope = _serviceProvider.CreateAsyncScope();
 
@@ -40,7 +40,15 @@ public class DatabaseSeedWorker : IHostedService
                 DisplayName = "Product Catalog API"
             }, cancellationToken);
         }
-
+        if(await scopeManager.FindByNameAsync("basket-api", cancellationToken) == null)
+        {
+            await scopeManager.CreateAsync(new OpenIddictScopeDescriptor
+            {
+                Name = "basket-api",
+                Description = "Basket API resource",
+                DisplayName = "Basket API"
+            }, cancellationToken);
+        }
         var clientId = "ui-client";
         if (await applicationManager.FindByClientIdAsync(clientId, cancellationToken) == null)
         {
@@ -68,42 +76,11 @@ public class DatabaseSeedWorker : IHostedService
                     Permissions.Scopes.Email,
                     Permissions.Scopes.Profile,
                     Permissions.Scopes.Roles,
-                    ProductCatalogApiScope
+                    ProductCatalogApiScope,
+                    BasketApiScope
                 }
             }, cancellationToken);
         }
-        clientId = "auth-ui-client";
-        if (await applicationManager.FindByClientIdAsync(clientId, cancellationToken) == null)
-        {
-            await applicationManager.CreateAsync(new OpenIddictApplicationDescriptor
-            {
-                ClientId = clientId,
-                DisplayName = "UI Client Admin",
-                RedirectUris =
-                {
-                    new Uri($"{adminUiUrl}signin-oidc")
-                },
-                PostLogoutRedirectUris =
-                {
-                    new Uri($"{adminUiUrl}signout-callback-oidc")
-                },
-                Permissions =
-                {
-                    Permissions.Endpoints.Authorization,
-                    Permissions.Endpoints.Token,
-                    Permissions.GrantTypes.AuthorizationCode,
-                    Permissions.GrantTypes.RefreshToken,
-                    Permissions.ResponseTypes.Code,
-                    Scopes.OpenId,
-                    Scopes.OfflineAccess,
-                    Permissions.Scopes.Email,
-                    Permissions.Scopes.Profile,
-                    Permissions.Scopes.Roles,
-                }
-            }, cancellationToken);
-        }
-
-
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
