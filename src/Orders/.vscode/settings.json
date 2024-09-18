@@ -1,0 +1,9 @@
+{
+    "dotnet.defaultSolution": "Orders.sln",
+    "terminal.integrated.env.windows": {
+        "PATH": "C:\\Users\\Yariki\\.azurelogicapps\\dependencies\\DotNetSDK;${env:PATH}"
+    },
+    "omnisharp.dotNetCliPaths": [
+        "C:\\Users\\Yariki\\.azurelogicapps\\dependencies\\DotNetSDK"
+    ]
+}
