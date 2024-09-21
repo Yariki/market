@@ -1,4 +1,4 @@
-﻿using Orders.Application.Common.Interfaces;
+﻿using Market.Shared.Application.Interfaces;
 using Orders.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -53,10 +53,10 @@ internal class CustomWebApplicationFactory : WebApplicationFactory<Program>
                     s.UserId == GetCurrentUserId()));
 
             services
-                .Remove<DbContextOptions<ApplicationDbContext>>()
-                .AddDbContext<ApplicationDbContext>((sp, options) =>
+                .Remove<DbContextOptions<OrderDbContext>>()
+                .AddDbContext<OrderDbContext>((sp, options) =>
                     options.UseSqlServer(ConnectionString,
-                        builder => builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+                        builder => builder.MigrationsAssembly(typeof(OrderDbContext).Assembly.FullName)));
 
             this.ConfigureServices(builder, services);
         });

@@ -1,5 +1,5 @@
-﻿using Orders.Api.Services;
-using Orders.Application.Common.Interfaces;
+﻿using Market.Shared.Application.Interfaces;
+using Orders.Api.Services;
 using Orders.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using NSwag;
@@ -19,7 +19,7 @@ public static class ConfigureServices
         services.AddHttpContextAccessor();
 
         services.AddHealthChecks()
-            .AddDbContextCheck<ApplicationDbContext>();
+            .AddDbContextCheck<OrderDbContext>();
 
         services.AddScoped<FluentValidationSchemaProcessor>(provider =>
         {

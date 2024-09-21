@@ -18,11 +18,15 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\..\Shared\Market.Shared.Infrastructure\Market.Shared.Infrastructure.csproj" />
         <ProjectReference Include="..\Application\Orders.Application.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Persistence\Configurations\" />
+      <Folder Include="Persistence\Interceptors\" />
       <Folder Include="Persistence\Migrations\" />
+      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

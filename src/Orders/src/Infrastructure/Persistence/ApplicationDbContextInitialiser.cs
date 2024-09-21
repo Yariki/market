@@ -6,9 +6,9 @@ namespace Orders.Infrastructure.Persistence;
 public class ApplicationDbContextInitialiser
 {
     private readonly ILogger<ApplicationDbContextInitialiser> _logger;
-    private readonly ApplicationDbContext _context;
+    private readonly OrderDbContext _context;
 
-    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, ApplicationDbContext context)
+    public ApplicationDbContextInitialiser(ILogger<ApplicationDbContextInitialiser> logger, OrderDbContext context)
     {
         _logger = logger;
         _context = context;

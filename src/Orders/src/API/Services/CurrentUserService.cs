@@ -1,6 +1,5 @@
 ﻿using System.Security.Claims;
-
-using Orders.Application.Common.Interfaces;
+using Market.Shared.Application.Interfaces;
 
 namespace Orders.Api.Services;
 
@@ -14,4 +13,8 @@ public class CurrentUserService : ICurrentUserService
     }
 
     public string? UserId => _httpContextAccessor.HttpContext?.User?.FindFirstValue(ClaimTypes.NameIdentifier);
+    public bool IsAdmin()
+    {
+        throw new NotImplementedException();
+    }
 }
