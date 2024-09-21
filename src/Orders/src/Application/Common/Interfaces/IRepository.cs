@@ -15,12 +15,12 @@ public interface IWriteRepository<TId, TEntity> : IRepository where TEntity: cla
 {
     Task<TEntity> AddAsync(TEntity entity);
     Task<TEntity> UpdateAsync(TEntity entity);
-    Task<List<TEntity>> GetAllAsync(string include = null);
-    Task<TEntity> GetByIdAsync(TId id, string include = null);
-    Task<TEntity> GetByAsync(Expression<Func<TEntity, bool>> selector, 
-        string include = null);
+    Task<List<TEntity>> GetAllAsync(string include = null!);
+    Task<TEntity> GetByIdAsync(TId id, string include = null!);
+    Task<TEntity?> GetByAsync(Expression<Func<TEntity, bool>> selector, 
+        string include = null!);
     Task<List<TEntity>> GetAllByAsync(Expression<Func<TEntity, bool>> selector, 
-        string include = null);
+        string include = null!);
     Task<TEntity> DeleteAsync(TId id);
 
     Task<IEnumerable<TEntity>> GetWithSpecification(ISpecification<TEntity> specification);

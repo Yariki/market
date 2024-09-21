@@ -38,7 +38,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\..\Shared\Market.Shared.Services\Market.Shared.Services.csproj" />
-      <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
     </ItemGroup>
 
 </Project>

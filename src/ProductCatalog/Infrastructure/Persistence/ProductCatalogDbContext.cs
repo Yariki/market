@@ -1,11 +1,8 @@
 ﻿using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
 using Market.Shared.Application.Interfaces;
 using Market.Shared.Infrastructure.Common;
 using Market.Shared.Infrastructure.Persistance.Interceptors;
 using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using ProductCatalog.Application.Common.Services;
 using ProductCatalog.Domain.Catalogs;

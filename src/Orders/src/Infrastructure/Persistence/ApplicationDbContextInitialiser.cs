@@ -43,8 +43,9 @@ public class ApplicationDbContextInitialiser
         }
     }
 
-    public async Task TrySeedAsync()
+    public Task TrySeedAsync()
     {
+        return Task.CompletedTask;
         //TODO: seed sample data
     }
 }

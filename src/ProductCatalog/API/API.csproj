@@ -10,7 +10,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
+        <ProjectReference Include="..\..\Shared\Market.Shared.Infrastructure\Market.Shared.Infrastructure.csproj" />
         <ProjectReference Include="..\Application\Application.csproj" />
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
     </ItemGroup>

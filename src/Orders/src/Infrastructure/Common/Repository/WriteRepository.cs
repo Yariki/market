@@ -26,13 +26,13 @@ public class WriteRepository<TId, TEntity>
         return entity;
     }
 
-    public async Task<TEntity> UpdateAsync(TEntity entity)
+    public Task<TEntity> UpdateAsync(TEntity entity = null!)
     {
         _dbContext.Entry(entity).State = EntityState.Modified;
-        return entity;
+        return Task.FromResult(entity);
     }
 
-    public Task<List<TEntity>> GetAllAsync(string include = null)
+    public Task<List<TEntity>> GetAllAsync(string include = null!)
     {
         var query = !string.IsNullOrEmpty(include)
             ? _dbContext.Set<TEntity>().Include(include)
@@ -40,15 +40,15 @@ public class WriteRepository<TId, TEntity>
         return query.ToListAsync();
     }
 
-    public async Task<TEntity> GetByIdAsync(TId id, string include = null)
+    public async Task<TEntity> GetByIdAsync(TId id, string include = null!)
     {
         var entity = !string.IsNullOrEmpty(include)
             ? await _dbContext.Set<TEntity>().Where(CompareIds(id)).Include(include).FirstOrDefaultAsync()
             : await _dbContext.Set<TEntity>().Where(CompareIds(id)).FirstOrDefaultAsync();
-        return entity;
+        return entity ?? throw new KeyNotFoundException(nameof(id));
     }
 
-    public async Task<TEntity> GetByAsync(Expression<Func<TEntity, bool>> selector, string include = null)
+    public async Task<TEntity?> GetByAsync(Expression<Func<TEntity, bool>> selector, string include = null!)
     {
         var query = _dbContext.Set<TEntity>().Where(selector);
         if (!string.IsNullOrEmpty(include))
@@ -59,7 +59,7 @@ public class WriteRepository<TId, TEntity>
         return await query.FirstOrDefaultAsync();
     }
 
-    public Task<List<TEntity>> GetAllByAsync(Expression<Func<TEntity, bool>> selector, string include = null)
+    public Task<List<TEntity>> GetAllByAsync(Expression<Func<TEntity, bool>> selector, string include = null!)
     {
         var query = _dbContext.Set<TEntity>().Where(selector);
         if (!string.IsNullOrEmpty(include))

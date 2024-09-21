@@ -1,6 +1,5 @@
 ﻿using Basket.Application.Basket.Models;
 using Market.EventBus;
-using Market.Shared.Domain;
 
 namespace Microsoft.Extensions.DependencyInjection.EventBus;
 

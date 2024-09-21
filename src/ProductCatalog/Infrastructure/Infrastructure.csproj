@@ -19,7 +19,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Shared\Market.Shared\Market.Shared.csproj" />
+        <ProjectReference Include="..\..\Shared\Market.Shared.Application\Market.Shared.Application.csproj" />
+        <ProjectReference Include="..\..\Shared\Market.Shared.Domain\Market.Shared.Domain.csproj" />
+        <ProjectReference Include="..\..\Shared\Market.Shared.Infrastructure\Market.Shared.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\Shared\Market.Shared.Services\Market.Shared.Services.csproj" />
         <ProjectReference Include="..\Application\Application.csproj" />
     </ItemGroup>
 

@@ -4,7 +4,10 @@ namespace Orders.Domain.Common;
 
 public abstract class BaseEntity<TId> 
 {
+    #nullable  disable
     public TId Id { get; set; }
+    
+    #nullable enable
 
     private readonly List<BaseEvent> _domainEvents = new();
 
