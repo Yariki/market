@@ -1,18 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Market.Shared.Application\Market.Shared.Application.csproj" />
     <ProjectReference Include="..\Market.Shared.Infrastructure\Market.Shared.Infrastructure.csproj" />
   </ItemGroup>
-
 </Project>

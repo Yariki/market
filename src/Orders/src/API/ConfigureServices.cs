@@ -38,7 +38,8 @@ public static class ConfigureServices
             var fluentValidationSchemaProcessor = serviceProvider.CreateScope().ServiceProvider.GetRequiredService<FluentValidationSchemaProcessor>();
 
             // Add the fluent validations schema processor
-            configure.SchemaProcessors.Add(fluentValidationSchemaProcessor);
+            //configure.SchemaProcessors.Add(fluentValidationSchemaProcessor); // TODO : Fix this issue - documentation does not contain SchemaProcessors collection. I need to find how to migrate to 14 ver.
+
 
             configure.Title = "Orders API";
             configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme

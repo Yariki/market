@@ -1,22 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <RootNamespace>Basket.Application</RootNamespace>
-        <AssemblyName>Basket.Application</AssemblyName>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
-        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\Market.Shared.Application\Market.Shared.Application.csproj" />
-        <ProjectReference Include="..\Domain\Basket.Domain.csproj" />
-    </ItemGroup>
-
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Basket.Application</RootNamespace>
+    <AssemblyName>Basket.Application</AssemblyName>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.5.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.15" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Market.Shared.Application\Market.Shared.Application.csproj" />
+    <ProjectReference Include="..\Domain\Basket.Domain.csproj" />
+  </ItemGroup>
 </Project>
