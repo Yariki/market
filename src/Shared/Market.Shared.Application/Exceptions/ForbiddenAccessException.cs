@@ -9,10 +9,6 @@ public class ForbiddenAccessException : MarketException
     {
     }
 
-    protected ForbiddenAccessException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
-
     public ForbiddenAccessException(string? message) : base(message)
     {
     }

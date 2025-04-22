@@ -1,45 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <IsPackable>true</IsPackable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\..\Shared\Market.EventBus.RabbitMq\Market.EventBus.RabbitMq.csproj" />
-        <ProjectReference Include="..\..\..\Shared\Market.EventBus\Market.EventBus.csproj" />
-        <ProjectReference Include="..\..\..\Shared\Market.Shared.CorrelationId\Market.Shared.CorrelationId.csproj" />
-        <ProjectReference Include="..\..\..\Shared\Market.Shared.Services\Market.Shared.Services.csproj" />
-        <ProjectReference Include="..\Application\Basket.Application.csproj" />
-        <ProjectReference Include="..\Infrastructure\Basket.Infrastructure.csproj" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <InternalsVisibleTo Include="Basket.Application.IntegrationTests" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
-        <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.3" />
-        <PackageReference Include="Microsoft.Tye.Extensions.Configuration" Version="0.10.0-alpha.21420.1" />
-        <PackageReference Include="NSwag.AspNetCore" Version="13.18.2" />
-        <PackageReference Include="NSwag.MSBuild" Version="13.18.2">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-		<PackageReference Include="ZymLabs.NSwag.FluentValidation.AspNetCore" Version="0.6.2" />
-    </ItemGroup>
-
-    <!-- Auto-generated Open API specification and Angular TypeScript clients -->
-    <PropertyGroup>
-        <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-    </PropertyGroup>
-    
-    <!--<Target Name="NSwag" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)' == 'Debug' ">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>true</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <IncludeOpenAPIAnalyzers>true</IncludeOpenAPIAnalyzers>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Shared\Market.EventBus.RabbitMq\Market.EventBus.RabbitMq.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Market.EventBus\Market.EventBus.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Market.Shared.CorrelationId\Market.Shared.CorrelationId.csproj" />
+    <ProjectReference Include="..\..\..\Shared\Market.Shared.Services\Market.Shared.Services.csproj" />
+    <ProjectReference Include="..\Application\Basket.Application.csproj" />
+    <ProjectReference Include="..\Infrastructure\Basket.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Basket.Application.IntegrationTests" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.2.2" />
+    <PackageReference Include="Microsoft.AspNetCore.ApiAuthorization.IdentityServer" Version="7.0.3" />
+    <PackageReference Include="Microsoft.Tye.Extensions.Configuration" Version="0.10.0-alpha.21420.1" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.18.2" />
+    <PackageReference Include="NSwag.MSBuild" Version="13.18.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="ZymLabs.NSwag.FluentValidation.AspNetCore" Version="0.6.2" />
+  </ItemGroup>
+  <!-- Auto-generated Open API specification and Angular TypeScript clients -->
+  <PropertyGroup>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+  </PropertyGroup>
+  <!--<Target Name="NSwag" AfterTargets="PostBuildEvent" Condition=" '$(Configuration)' == 'Debug' ">
         <Exec ConsoleToMSBuild="true" ContinueOnError="true" WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) run /variables:Configuration=$(Configuration)">
             <Output TaskParameter="ExitCode" PropertyName="NSwagExitCode" />
             <Output TaskParameter="ConsoleOutput" PropertyName="NSwagOutput" />
@@ -48,5 +42,4 @@
         <Message Text="$(NSwagOutput)" Condition="'$(NSwagExitCode)' == '0'" Importance="low" />
         <Error Text="$(NSwagOutput)" Condition="'$(NSwagExitCode)' != '0'" />
     </Target>-->
-
 </Project>

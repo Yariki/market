@@ -8,10 +8,6 @@ public class MarketException : Exception
     {
     }
 
-    protected MarketException(SerializationInfo info, StreamingContext context) : base(info, context)
-    {
-    }
-
     public MarketException(string? message) : base(message)
     {
     }
